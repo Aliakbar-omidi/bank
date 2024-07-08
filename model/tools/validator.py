@@ -7,7 +7,7 @@ def name_validator(title, message):
         raise ValueError(message)
 
 def id_validator(id, message):
-    if isinstance(id, int):
+    if re.match(r"^\d{3,20}$", id):
         return id
     else:
         raise ValueError(message)

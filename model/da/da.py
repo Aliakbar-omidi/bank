@@ -56,15 +56,3 @@ class DataAccess:
     def find_by_date_range(self,start_date,end_date):
         entity = session.query(self.class_name).filter(self.class_name._date_time.between(start_date,end_date)).all()
         return entity
-
-
-
-
-
-
-
-
-
-
-
-

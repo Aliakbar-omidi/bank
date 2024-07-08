@@ -4,7 +4,6 @@ from sqlalchemy.orm import relationship
 from model.tools.validator import *
 import re
 
-
 class Bank(Base):
     __tablename__ = "bank_tbl"
     _id = Column("id", Integer, primary_key=True, autoincrement=True)
