@@ -12,13 +12,18 @@ class Bank(Base):
     _location = Column("location", String(20),nullable=False)
     _start_work = Column("start_date", DateTime)
     _end_work = Column("end_date", DateTime)
+    _branch = Column("branch", String(20))
+    _number_branch = Column("number_branch",Integer)
 
-    def __init__(self, name, location, start_work, end_work, status):
+
+    def __init__(self, name, location, start_work, end_work, branch,number_branch, status):
         self.id = None
         self.name = name
         self.location = location
         self.startwork = start_work
         self.end_work = end_work
+        self.branch = branch
+        self.number_branch = number_branch
         self.status = status
 
     def get_id(self):
@@ -54,6 +59,18 @@ class Bank(Base):
     def set_end_work(self,end_work):
         self.end_work = end_work
 
+    def get_branch(self):
+        return self._branch
+
+    def set_branch(self,branch):
+        self._branch = branch
+
+    def get_number_branch(self):
+        return self._number_branch
+
+    def set_number_branch(self,number_branch):
+        self._number_branch = number_branch
+
     def get_status(self):
         return self._status
 
@@ -68,9 +85,3 @@ class Bank(Base):
     location = property(get_locatioon,set_location)
     start_work = property(get_stert_work,set_start_work)
     end_work = property(get_end_work,set_end_work)
-
-    def name_validator(title,message):
-        if isinstance(title,str) and re.match(r"^[a-zA-Z\s]{3,30}$"):
-            return title
-        else:
-            raise ValueError(message)

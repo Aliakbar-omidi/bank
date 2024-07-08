@@ -5,30 +5,26 @@ from model.tools.validator import *
 import re
 
 
-class Bank(Base):
-    __tablename__ = "bank_tbl"
+class Card(Base):
+    __tablename__ = "chek_tbl"
     _id = Column("id", Integer, primary_key=True, autoincrement=True)
-    _name = Column("title", String(20), nullable=False)
-    _location = Column("location", String(20), nullable=False)
-    _start_work = Column("start_date", DateTime)
-    _end_work = Column("end_date", DateTime)
+    _number_card = Column("number_card", Integer, nullable=False)
+    _cvv2 = Column("cvv2",Integer, nullable=False)
+    _expiration_date = Column("expiration_date", DateTime, nullable=False)
+    _password = Column("password", String(20), nullable=False)
 
-    def __init__(self, number_card, cvv2, expiretion_date, password ):
+    def __init__(self, number_card, cvv2, expirationـdate, password):
         self.id = None
         self.number_card = number_card
         self.cvv2 = cvv2
-        self.expiretion_date = expiretion_date
+        self.expirationـdate = expirationـdate
         self.password = password
-
 
     def get_id(self):
         return self._id
 
     def set_id(self, id):
-        if isinstance(id, int):
-            self._id = id
-        else:
-            raise ValueError("id must be an integer")
+        self.id = id_validator(id,"invalid id")
 
     def get_number_card(self):
         return self._number_card
