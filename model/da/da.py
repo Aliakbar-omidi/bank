@@ -1,10 +1,9 @@
-from sqlalchemy import create_engine, and_, or_
-from sqlalchemy import sessionmaker
+﻿from sqlalchemy import create_engine, and_, or_
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import create_database, database_exists
-from model.entity.base import Base
+from model.entity import *
 
-
-connection_string = "mysql+pymysql://root:Aa79807980@localhost:3306/bank"
+connection_string = "mysql+pymysql://root:root123@localhost:3306/bank"
 if not database_exists(connection_string):
     create_database(connection_string)
 
@@ -16,22 +15,23 @@ session = Session()
 
 
 class DataAccess:
-    def __init__(self,class_name):
+    def __init__(self, class_name):
         self.class_name = class_name
 
-    def save(self,entity):
+    def save(self, entity):
         session.add(entity)
-        session.comit()
+        session.commit()
         session.refresh(entity)
         return entity
 
-    def edit(self,entity):
+    def edit(self, entity):
         session.merge(entity)
         session.commit()
         session.refresh(entity)
         return entity
 
-    def remove(self,entity):
+    def remove(self, id):
+        entity = session.get(self.class_name, id)
         session.delete(entity)
         session.commit()
         session.refresh(entity)
@@ -42,17 +42,9 @@ class DataAccess:
         return entity_list
 
     def find_by_id(self, id):
-        entity = session.get(self.class_name,id)
+        entity = session.get(self.class_name, id)
         return entity
 
     def find_by(self, find_statement):
         entity = session.query(self.class_name).filter(find_statement).all()
-        return entity
-
-    def check_word_in_text(self, word):
-        entity = session.query(self.class_name).filter(self.class_name._text.like(f'%{word}%')).all()
-        return entity
-
-    def find_by_date_range(self, start_date, end_date):
-        entity = session.query(self.class_name).filter(self.class_name._date_time.between(start_date,end_date)).all()
         return entity
