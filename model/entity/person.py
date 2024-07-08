@@ -1,17 +1,17 @@
-from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, Date
 from model.entity.base import Base
 from sqlalchemy.orm import relationship
 from model.tools.validator import *
 
 class Person(Base):
     __tablename__ = 'person_tbl'
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    _id = Column("id", Integer, primary_key=True, autoincrement=True)
     name = Column("name",String(30))
     family = Column("family", String(30))
     national_id = Column("national_id", Integer)
-    birthday = Column(DateTime)
+    birthday = Column("",Date)
     phone = Column("phone", Integer)
-    email = Column("email",String(30))
+    email = Column("email", String(30))
 
     def __init__(self, name, family, national_id, birthday, phone, email):
         self.id = None
