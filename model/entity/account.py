@@ -5,10 +5,13 @@ from model.tools.validator import *
 
 
 class Account(Base):
-    __tablename__ = 'account'
+    __tablename__ = 'account_tbl'
     _id = Column(Integer, primary_key=True, autoincrement=True)
     _hesab_type = Column("hesab_type",String(30), nullable=False)
-    _hesab_numbeer = Column("hesab_numbeer",String(30), nullable=False)
+    _hesab_numbeer = Column(Integer ,default=0, nullable=False)
+
+    person_id = Column(Integer, ForeignKey("person_tbl.id"))
+    person = relationship("Person")
 
     def __init__(self, hesab_type, hesab_numbeer):
         self.id = None

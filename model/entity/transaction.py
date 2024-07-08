@@ -4,13 +4,13 @@ from sqlalchemy.orm import relationship
 from model.tools.validator import *
 
 class Transaction(Base):
-    __tablename__ = 'transaction'
+    __tablename__ = 'transaction_tbl'
     id = Column("id",Integer, primary_key=True, autoincrement=True)
     _shenase = Column("shenase",Integer, nullable=False)
     _description = Column("description",String(30), nullable=False)
     _payment_gateway = Column("payment_gateway",String(30), nullable=False)
-    _price = Column("price",Integer, nullable=False)
-    _status = Column("status",String(30), nullable=False)
+    _price = Column(Integer ,default=0)
+    _status = Column("status",Boolean)
 
     def __init__(self, shenase, description, payment_gateway, price, status):
         self.shenase = shenase

@@ -4,13 +4,13 @@ from sqlalchemy.orm import relationship
 from model.tools.validator import *
 
 class Chek(Base):
-    __tablename__ = 'chek'
+    __tablename__ = 'che_tblk'
     _id = Column(Integer, primary_key=True, autoincrement=True)
     _shenase = Column("shenase", Integer, nullable=False)
-    _price = Column("price", Integer, nullable=False)
-    _national_id = Column("national_id", Integer, nullable=False)
-    _date_now = Column("date_now", DateTime, nullable=False)
-    _date_end = Column("date_end", DateTime, nullable=False)
+    _price = Column("price", Integer)
+    _national_id = Column("national_id", Integer, unique=True)
+    _date_now = Column("date_now", DateTime)
+    _date_end = Column("date_end", DateTime)
 
 
     def __init__(self, shenase, _price, national_id, date_now, date_end):
