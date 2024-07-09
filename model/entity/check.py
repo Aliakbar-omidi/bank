@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, Date
-from model.entity.base import Base
+from model.entity import *
 from sqlalchemy.orm import relationship
 from model.tools.validator import *
 
