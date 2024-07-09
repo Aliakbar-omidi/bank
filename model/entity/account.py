@@ -6,17 +6,20 @@ from model.tools.validator import *
 
 class Account(Base):
     __tablename__ = 'account_tbl'
-    _id = Column(Integer, primary_key=True, autoincrement=True)
-    _hesab_type = Column("hesab_type",String(30), nullable=False)
-    _hesab_numbeer = Column(Integer ,default=0, nullable=False)
+    _id = Column("id",Integer, primary_key=True, autoincrement=True)
+    _hesab_type = Column("hesab_type", String(30), nullable=False)
+    _hesab_number = Column("hesab_number", Integer , default=0, nullable=False)
 
-    person_id = Column(Integer, ForeignKey("person_tbl.id"))
+    _person_id = Column("person_id", Integer, ForeignKey("person_tbl.id"))
     person = relationship("Person")
 
-    def __init__(self, hesab_type, hesab_numbeer):
+    _bank_id = Column("bank_id",Integer, ForeignKey("bank_tbl.id"))
+    bank = relationship("Bank")
+
+    def __init__(self, hesab_type, hesab_number):
         self.id = None
-        self._hesab_type = hesab_type
-        self._hesab_numbeer = hesab_numbeer
+        self.hesab_type = hesab_type
+        self.hesab_number = hesab_number
 
     def get_id(self):
         return self._id
@@ -31,11 +34,11 @@ class Account(Base):
         self._hesab_type = hesab_type
 
     def get_hesab_number(self):
-        return self._hesab_numbeer
+        return self._hesab_number
 
-    def set_hesab_number(self, hesab_numbeer):
-        self._hesab_numbeer = hesab_numbeer
+    def set_hesab_number(self, hesab_number):
+        self._hesab_number = hesab_number
 
     id = property(get_id, set_id)
     hesab_type = property(get_hesab_type, set_hesab_type)
-    hesab_numbeer = property(get_hesab_number,set_hesab_number)
+    hesab_number = property(get_hesab_number,set_hesab_number)

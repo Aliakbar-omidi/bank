@@ -1,29 +1,32 @@
-from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, Date
 from model.entity.base import Base
 from sqlalchemy.orm import relationship
 from model.tools.validator import *
 
 
 class Card(Base):
-    __tablename__ = "chek_tbl"
+    __tablename__ = "card_tbl"
     _id = Column("id", Integer, primary_key=True, autoincrement=True)
     _number_card = Column("number_card", Integer, nullable=False)
     _cvv2 = Column("cvv2",Integer, nullable=False)
-    _expiration_date = Column("expiration_date", DateTime, nullable=False)
+    _expiration_date = Column("expiration_date", Date, nullable=False)
     _password = Column("password", String(20), nullable=False)
+
+    _account_id = Column("account_id", Integer, ForeignKey("account_tbl.id"))
+    account = relationship("Account")
 
     def __init__(self, number_card, cvv2, expiration_date, password):
         self.id = None
         self.number_card = number_card
         self.cvv2 = cvv2
-        self._expiration_date = expiration_date
+        self.expiration_date = expiration_date
         self.password = password
 
     def get_id(self):
         return self._id
 
     def set_id(self, id):
-        self._id = id_validator(id,"invalid id")
+        self._id = id
 
     def get_number_card(self):
         return self._number_card

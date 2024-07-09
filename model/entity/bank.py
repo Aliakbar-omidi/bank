@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, Time
 from model.entity.base import Base
 from sqlalchemy.orm import relationship
 from model.tools.validator import *
@@ -9,11 +9,10 @@ class Bank(Base):
     _id = Column("id", Integer, primary_key=True, autoincrement=True)
     _name = Column("title", String(20), nullable=False)
     _location = Column("location", String(20),nullable=False)
-    _start_work = Column("start_date", DateTime)
-    _end_work = Column("end_date", DateTime)
-    _branch = Column("branch", String(20))
+    _start_work = Column("start_time", Time)
+    _end_work = Column("end_time", Time)
+    _branch = Column("branch", String(20), nullable=False)
     _number_branch = Column("number_branch",Integer)
-
 
     def __init__(self, name, location, start_work, end_work, branch,number_branch, status):
         self.id = None
@@ -29,10 +28,7 @@ class Bank(Base):
         return self._id
 
     def set_id(self, id):
-        if isinstance(id,int):
-            self._id = id
-        else:
-            raise ValueError("id must be an integer")
+        self._id = id
 
     def get_name(self):
         return self._name

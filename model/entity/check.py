@@ -1,36 +1,39 @@
-from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, Date
 from model.entity.base import Base
 from sqlalchemy.orm import relationship
 from model.tools.validator import *
 
-class Chek(Base):
-    __tablename__ = 'che_tblk'
+class Check(Base):
+    __tablename__ = 'check_tbl'
     _id = Column(Integer, primary_key=True, autoincrement=True)
-    _shenase = Column("shenase", Integer, nullable=False)
+    _check_serial = Column("check_serial", Integer, nullable=False)
     _price = Column("price", Integer)
     _national_id = Column("national_id", Integer, unique=True)
-    _date_now = Column("date_now", DateTime)
-    _date_end = Column("date_end", DateTime)
+    _date_now = Column("date_now", Date)
+    _date_end = Column("date_end", Date)
 
+    _account_id = Column("account_id", Integer, ForeignKey("account_tbl.id"))
+    account = relationship("Account")
 
-    def __init__(self, shenase, _price, national_id, date_now, date_end):
-        self._shenase = shenase
-        self._price = _price
+    def __init__(self, check_serial, price, national_id, date_now, date_end):
+        self._check_serial = check_serial
+        self._price = price
         self._national_id = national_id
         self._date_now = date_now
         self._date_end = date_end
+
 
     def get_id(self):
         return self._id
 
     def set_id(self):
-        self._id = str(self._id)
+        self._id = id
 
-    def get_shenase(self):
-        return self._shenase
+    def get_check_serial(self):
+        return self._check_serial
 
-    def set_shenase(self,shenase):
-        self._shenase = shenase
+    def set_check_serial(self,check_serial):
+        self._check_serial = check_serial
 
     def get_price(self):
         return self._price
@@ -47,7 +50,7 @@ class Chek(Base):
     def get_date_now(self):
         return self._date_now
 
-    def set_date_now(self,date_now):
+    def set_date_now(self, date_now):
         self._date_now = date_now
 
     def get_date_end(self):
