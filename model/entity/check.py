@@ -3,9 +3,10 @@ from model.entity import *
 from sqlalchemy.orm import relationship
 from model.tools.validator import *
 
+
 class Check(Base):
     __tablename__ = 'check_tbl'
-    _id = Column(Integer, primary_key=True, autoincrement=True)
+    _id = Column("id",Integer, primary_key=True, autoincrement=True)
     _check_serial = Column("check_serial", Integer, nullable=False)
     _price = Column("price", Integer)
     _national_id = Column("national_id", Integer, unique=True)
