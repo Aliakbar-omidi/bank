@@ -8,18 +8,19 @@ class Bank(Base):
     __tablename__ = "bank_tbl"
     _id = Column("id", Integer, primary_key=True, autoincrement=True)
     _name = Column("title", String(20), nullable=False)
-    _location = Column("location", String(20),nullable=False)
-    _start_work = Column("start_time", Time)
-    _end_work = Column("end_time", Time)
+    _location = Column("location", String(20), nullable=False)
+    _start_time = Column("start_time", Time)
+    _end_time = Column("end_time", Time)
     _branch = Column("branch", String(20), nullable=False)
-    _number_branch = Column("number_branch",Integer)
+    _number_branch = Column("number_branch", Integer)
+    _status = Column("status", Boolean, nullable=False)
 
-    def __init__(self, name, location, start_work, end_work, branch,number_branch, status):
+    def __init__(self, name, location, start_time, end_time, branch, number_branch, status):
         self.id = None
         self.name = name
         self.location = location
-        self.startwork = start_work
-        self.end_work = end_work
+        self.start_time = start_time
+        self.end_time = end_time
         self.branch = branch
         self.number_branch = number_branch
         self.status = status
@@ -42,22 +43,22 @@ class Bank(Base):
     def set_location(self,location):
         self._location = location
 
-    def get_stert_work(self):
-        return self._start_work
+    def get_start_time(self):
+        return self._start_time
 
-    def set_start_work(self,start_work):
-        self._start_work = start_work
+    def set_start_time(self, start_time):
+        self._start_time = start_time
 
-    def get_end_work(self):
-        return self._end_work
+    def get_end_time(self):
+        return self._end_time
 
-    def set_end_work(self,end_work):
-        self.end_work = end_work
+    def set_end_time(self, end_time):
+        self._end_time = end_time
 
     def get_branch(self):
         return self._branch
 
-    def set_branch(self,branch):
+    def set_branch(self, branch):
         self._branch = branch
 
     def get_number_branch(self):
@@ -75,8 +76,11 @@ class Bank(Base):
         else:
             raise ValueError("status must be bool")
 
-    id = property(get_id,set_id)
-    name = property(get_name,set_name)
-    location = property(get_locatioon,set_location)
-    start_work = property(get_stert_work,set_start_work)
-    end_work = property(get_end_work,set_end_work)
+    id = property(get_id, set_id)
+    name = property(get_name, set_name)
+    location = property(get_locatioon, set_location)
+    start_time = property(get_start_time, set_start_time)
+    end_time = property(get_end_time, set_end_time)
+    branch = property(get_branch, set_branch)
+    number_branch = property(get_number_branch, set_number_branch)
+    status = property(get_status, set_status)

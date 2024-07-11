@@ -3,11 +3,10 @@ from model.entity import *
 from sqlalchemy.orm import relationship
 from model.tools.validator import *
 
-
 class Check(Base):
     __tablename__ = 'check_tbl'
     _id = Column("id",Integer, primary_key=True, autoincrement=True)
-    _check_serial = Column("check_serial", Integer, nullable=False)
+    _check_serial = Column("check_serial", Integer)
     _price = Column("price", Integer)
     _national_id = Column("national_id", Integer, unique=True)
     _date_now = Column("date_now", Date)
@@ -17,17 +16,17 @@ class Check(Base):
     account = relationship("Account")
 
     def __init__(self, check_serial, price, national_id, date_now, date_end):
-        self._check_serial = check_serial
-        self._price = price
-        self._national_id = national_id
-        self._date_now = date_now
-        self._date_end = date_end
-
+        self.id = None
+        self.check_serial = check_serial
+        self.price = price
+        self.national_id = national_id
+        self.date_now = date_now
+        self.date_end = date_end
 
     def get_id(self):
         return self._id
 
-    def set_id(self):
+    def set_id(self, id):
         self._id = id
 
     def get_check_serial(self):
@@ -61,6 +60,7 @@ class Check(Base):
         self._date_end = date_end
 
     id = property(get_id,set_id)
+    check_serial = property(get_check_serial,set_check_serial)
     price = property(get_price,set_price)
     national_id = property(get_national_id,set_national_id)
     date_now = property(get_date_now,set_date_now)

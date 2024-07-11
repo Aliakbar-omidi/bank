@@ -40,11 +40,11 @@ class Card(Base):
     def set_cvv2(self, cvv2):
         self._cvv2 = cvv2
 
-    def get_expiretion_date(self):
-        return self._expiretion_date
+    def get_expiration_date(self):
+        return self._expiration_date
 
-    def set_expiretion_date(self, expiretion_date):
-        self._expiretion_date = expiretion_date
+    def set_expiration_date(self, expiration_date):
+        self._expiration_date = expiration_date
 
     def get_password(self):
         return self._password
@@ -55,5 +55,5 @@ class Card(Base):
     id = property(get_id, set_id)
     number_card = property(get_number_card, set_number_card)
     cvv2 = property(get_cvv2, set_cvv2)
-    expiretion_date = property(get_expiretion_date, set_expiretion_date)
+    expiration_date = property(get_expiration_date, set_expiration_date)
     password = property(get_password, set_password)

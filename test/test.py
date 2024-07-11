@@ -1,24 +1,38 @@
+from datetime import date
 from model.da.da import DataAccess
-from model.entity.account import Account
-from model.entity.person import Person
-from model.entity.check import Check
-from model.entity.transaction import Transaction
-from model.entity.card import Card
+from model.entity import *
 
-# account = Account("asssa", 233332)
+
+# test ok
+# account = Account("test", 12121212)
 # account_da = DataAccess(Account)
 # account_da.save(account)
 # print(account.id)
 
-# todo: در فایل دیتا بیس هم فقط فیلد ایدی ساخته میشود
-# person = Person("ali", "mod",2123232332 ,2000/10/10, 32333323,"test@gmail.com")
+
+# test ok
+# bank = Bank("of","testi",'9:10:45','10:30:56',"ewewe",32323,False)
+# bank_da = DataAccess(Bank)
+# bank_da.save(bank)
+# print(bank.id)
+
+
+# test ok
+# card = Card(1221221,234, '2027/10/20', "asjhj22")
+# card_da = DataAccess(Card)
+# card_da.save(card)
+# print(card_da.id)
+
+
+# test ok
+# check = Check(233232,2332223,500002,'2021-01-01', '2021-01-05')
+# check_data = DataAccess(Check)
+# check_data.save(check)
+# print(check.id)
+
+
+# test ok
+# person = Person("test", "testpour",1234567, '2000/11/12', 91221122,"test_testi@gmail.com")
 # person_da = DataAccess(Person)
 # person_da.save(person)
 # print(person.id)
-
-
-# todo: ارور دارد
-check = Check(3434, 44344, 434444343, 200/12/10, 2000/12/12)
-check_data = DataAccess(Check)
-check_data.save(check)
-print(check.id)

@@ -7,15 +7,12 @@ from model.tools.validator import *
 class Person(Base):
     __tablename__ = 'person_tbl'
     _id = Column("id", Integer, primary_key=True, autoincrement=True)
-    _test= Column("test", String(30))
     _name = Column("name", String(30))
     _family = Column("family", String(30))
     _national_id = Column("national_id", Integer)
     _birthday = Column("birthday", Date)
     _phone = Column("phone", Integer)
     _email = Column("email", String(30))
-
-    account = relationship("Account")
 
     def __init__(self, name, family, national_id, birthday, phone, email):
         self.id = None
