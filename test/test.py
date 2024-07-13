@@ -1,6 +1,8 @@
 from datetime import date
 from model.da.da import DataAccess
 from model.entity import *
+from controller import *
+from controller import *
 
 
 # test ok
@@ -36,3 +38,10 @@ from model.entity import *
 # person_da = DataAccess(Person)
 # person_da.save(person)
 # print(person.id)
+
+
+
+
+# print(BankController.find_all())
+# print(BankController.save_bank("mellat","teh",'08:20:30','10:20:30','rey',20,True))
+print(BankController.edit_bank(10,"edited","sd",'10:10:10','20:20:20',"teh",1234567,True))

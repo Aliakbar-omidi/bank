@@ -4,10 +4,11 @@ from sqlalchemy.orm import relationship
 from model.tools.validator import *
 import re
 
+
 class Bank(Base):
     __tablename__ = "bank_tbl"
     _id = Column("id", Integer, primary_key=True, autoincrement=True)
-    _name = Column("title", String(20), nullable=False)
+    _name = Column("name", String(20), nullable=False)
     _location = Column("location", String(20), nullable=False)
     _start_time = Column("start_time", Time)
     _end_time = Column("end_time", Time)
