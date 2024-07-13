@@ -15,9 +15,10 @@ class AccountController:
             return False, f"{e}"
 
     @staticmethod
-    def edit_account(hesab_type, hesab_number):
+    def edit_account(id, hesab_type, hesab_number):
         try:
             account = Account(hesab_type, hesab_number)
+            account.id = id
             AccountService.edit(account)
             Logger.info(f"Account edited {account}")
             return True,account
@@ -40,8 +41,8 @@ class AccountController:
     def find_all():
         try:
             account_list = AccountService.find_all()
-            Logger.info(f"Job FindAll")
-            return True,account_list
+            Logger.info(f"Account FindAll")
+            return True, account_list
         except Exception as e:
             Logger.error(f"{e}")
             return False, f"{e}"

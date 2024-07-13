@@ -41,8 +41,8 @@ class BankController:
     def find_all():
         try:
             bank_list = BankService.find_all()
-            Logger.info(f"Job FindAll")
-            return True,bank_list
+            Logger.info(f"Bank FindAll")
+            return True, bank_list
         except Exception as e:
             Logger.error(f"{e}")
             return False, f"{e}"
