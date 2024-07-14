@@ -2,6 +2,7 @@ from model.service import *
 from model.entity import *
 from model.tools.logger import Logger
 
+
 class CardController:
     @staticmethod
     def save_card(number_card, cvv2, expiration_date, password):
@@ -15,9 +16,10 @@ class CardController:
             return False, f"{e}"
 
     @staticmethod
-    def edit_card(hesab_type, hesab_number):
+    def edit_card(id, number_card, cvv2, expiration_date, password):
         try:
-            card = Card(hesab_type, hesab_number)
+            card = Card(number_card, cvv2, expiration_date, password)
+            card.id = id
             CardService.edit(card)
             Logger.info(f"card edited {card}")
             return True,card

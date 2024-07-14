@@ -16,9 +16,10 @@ class PersonController:
             return False, f"{e}"
 
     @staticmethod
-    def edit_person(name, family, national_id, birthday, phone, email):
+    def edit_person(id, name, family, national_id, birthday, phone, email):
         try:
             person = Person(name, family, national_id, birthday, phone, email)
+            person.id = id
             PersonService.edit(person)
             Logger.info(f"person edited {person}")
             return True,person

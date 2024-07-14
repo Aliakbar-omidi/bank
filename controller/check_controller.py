@@ -16,16 +16,16 @@ class CheckController:
             return False, f"{e}"
 
     @staticmethod
-    def edit_check(check_serial, price, national_id, date_now, date_end):
+    def edit_check(id,check_serial, price, national_id, date_now, date_end):
         try:
             check = Check(check_serial, price, national_id, date_now, date_end)
+            check.id = id
             CheckService.edit(check)
             Logger.info(f"check edited {check}")
-            return True,check
+            return True, check
         except Exception as e:
             Logger.error(f"{e}")
             return False, f"{e}"
-
 
     @staticmethod
     def remove_check(id):

@@ -3,6 +3,7 @@ from model.entity import *
 from sqlalchemy.orm import relationship
 from model.tools.validator import *
 
+
 class Check(Base):
     __tablename__ = 'check_tbl'
     _id = Column("id",Integer, primary_key=True, autoincrement=True)
@@ -12,8 +13,8 @@ class Check(Base):
     _date_now = Column("date_now", Date)
     _date_end = Column("date_end", Date)
 
-    _account_id = Column("account_id", Integer, ForeignKey("account_tbl.id"))
-    account = relationship("Account")
+    # _account_id = Column("account_id", Integer, ForeignKey("account_tbl.id"))
+    # account = relationship("Account")
 
     def __init__(self, check_serial, price, national_id, date_now, date_end):
         self.id = None
@@ -44,7 +45,7 @@ class Check(Base):
     def get_national_id(self):
         return self._national_id
 
-    def set_national_id(self,national_id):
+    def set_national_id(self, national_id):
         self._national_id = national_id
 
     def get_date_now(self):
@@ -56,7 +57,7 @@ class Check(Base):
     def get_date_end(self):
         return self._date_end
 
-    def set_date_end(self,date_end):
+    def set_date_end(self, date_end):
         self._date_end = date_end
 
     id = property(get_id,set_id)

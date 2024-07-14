@@ -3,6 +3,7 @@ from model.entity import *
 from sqlalchemy.orm import relationship
 from model.tools.validator import *
 
+
 class Transaction(Base):
     __tablename__ = 'transaction_tbl'
     _id = Column("id",Integer, primary_key=True, autoincrement=True)
@@ -16,10 +17,11 @@ class Transaction(Base):
     _account_id = Column("account_id", Integer, ForeignKey("account_tbl.id"))
     account = relationship("Account")
 
-    def __init__(self, serial, description, payment_gateway, price, status):
+    def __init__(self, serial, description, date, payment_gateway, price, status):
         self.id = None
         self.serial = serial
         self.description = description
+        self.date = date
         self.payment_gateway = payment_gateway
         self.price = price
         self.status = status
@@ -60,7 +62,14 @@ class Transaction(Base):
     def set_price(self, price):
         self._price = price
 
+    def get_status(self):
+        return self._status
 
+    def set_status(self, status):
+        if isinstance(status, bool):
+            self._status = status
+        else:
+            raise ValueError("Status must be boolean")
 
     id = property(get_id, set_id)
     serial = property(get_serial, set_serial)
@@ -68,3 +77,4 @@ class Transaction(Base):
     date = property(get_date, set_date)
     payment_gateway = property(get_payment_gateway, set_payment_gateway)
     price = property(get_price, set_price)
+    status = property(get_status, set_status)
