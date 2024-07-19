@@ -54,7 +54,7 @@ class Check(Base):
 
     @national_id.setter
     def national_id(self, national_id):
-        self._national_id = int_validator(national_id, "Invalid id")
+        self._national_id = national_id__validator(national_id, "Invalid id")
 
     @property
     def date_now(self):

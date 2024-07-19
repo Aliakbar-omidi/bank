@@ -9,7 +9,7 @@ class Transaction(Base):
     _id = Column("id",Integer, primary_key=True, autoincrement=True)
     _serial = Column("serial", Integer, nullable=False)
     _description = Column("description", String(30), nullable=False)
-    _date = Column("date",DateTime, nullable=False)
+    _date_time = Column("date_time",DateTime, nullable=False)
     _payment_gateway = Column("payment_gateway", String(30), nullable=False)
     _price = Column("price", Integer, default=0)
     _status = Column("status", Boolean)
@@ -17,11 +17,11 @@ class Transaction(Base):
     _account_id = Column("account_id", Integer, ForeignKey("account_tbl.id"))
     account = relationship("Account")
 
-    def __init__(self, serial, description, date, payment_gateway, price, status):
+    def __init__(self, serial, description, date_time, payment_gateway, price, status):
         self.id = None
         self.serial = serial
         self.description = description
-        self.date = date
+        self.date_time = date_time
         self.payment_gateway = payment_gateway
         self.price = price
         self.status = status
@@ -51,12 +51,12 @@ class Transaction(Base):
         self._description = description
 
     @property
-    def date(self):
-        return self._date
+    def date_time(self):
+        return self._date_time
 
-    @date.setter
-    def date(self, date):
-        self._date = date
+    @date_time.setter
+    def date_time(self, date_time):
+        self._date_time = date_time
 
     @property
     def payment_gateway(self):

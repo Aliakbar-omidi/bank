@@ -14,7 +14,7 @@ from controller import *
 # print(AccountController.save_account("jary",122554))
 # print(AccountController.edit_account(5,'edited',545454))
 # print(AccountController.remove_account(4))
-# print(AccountController.find_all())   #--
+# print(AccountController.find_all())
 
 # test controller card ok ------------
 # print(CardController.save_card(12213323, 234,'2000-01-01',"21qwq")) #--
@@ -38,7 +38,9 @@ from controller import *
 
 
 # test controller transaction ------------
-# print(TransactionController.save_transaction(7878,"kharid kala",'2024-12-21',"poz",30000,True))
+# date = '2018-01-20'
+# time = '12:00:00'
+# print(TransactionController.save_transaction(89899,"kharid kala",f'{date} {time}',"atm",4000,True))
 # print(TransactionController.edit_transaction(3,7878,"kharid kala",'2024-12-21',"poz",30000,False))
 # print(TransactionController.remove_transaction(4))
 # print(TransactionController.find_all()) #--

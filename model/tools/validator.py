@@ -30,11 +30,12 @@ def date_validator(date_value, message):
         raise ValueError(message)
 
 
-def int_validator(int_value, message):
-    if isinstance(int_value, int):
-        return int_value
+def national_id__validator(natonal_id_value, message):
+    if isinstance(natonal_id_value, str) and re.match(r"^\d{10}$", natonal_id_value):
+        return natonal_id_value
     else:
         raise ValueError(message)
+
 
 def email_validator(email_value, message):
     if isinstance(email_value, str) and re.match(r"^[a-zA-Z\s]+@(gmail|yahoo)\.com$", email_value):

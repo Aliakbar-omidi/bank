@@ -14,6 +14,8 @@ class Person(Base):
     _phone = Column("phone", Integer)
     _email = Column("email", String(30))
 
+    account = relationship("Account")
+
     def __init__(self, name, family, national_id, birthday, phone, email):
         self.id = None
         self.name = name
@@ -68,7 +70,7 @@ class Person(Base):
         return self._phone
 
     @phone.setter
-    def set_phone(self, phone):
+    def phone(self, phone):
         self._phone = phone
 
     @property

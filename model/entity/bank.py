@@ -16,6 +16,8 @@ class Bank(Base):
     _number_branch = Column("number_branch", Integer)
     _status = Column("status", Boolean)
 
+    account = relationship("Account")
+
     def __init__(self, name, location, start_time, end_time, branch, number_branch, status):
         self.id = None
         self.name = name
