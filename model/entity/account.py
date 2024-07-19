@@ -21,24 +21,26 @@ class Account(Base):
         self.hesab_type = hesab_type
         self.hesab_number = hesab_number
 
-    def get_id(self):
+    @property
+    def id(self):
         return self._id
 
-    def set_id(self, id):
+    @id.setter
+    def id(self, id):
         self._id = id
 
-    def get_hesab_type(self):
+    @property
+    def hesab_type(self):
         return self._hesab_type
 
-    def set_hesab_type(self, hesab_type):
+    @hesab_type.setter
+    def hesab_type(self, hesab_type):
         self._hesab_type = hesab_type
 
-    def get_hesab_number(self):
+    @property
+    def hesab_number(self):
         return self._hesab_number
 
-    def set_hesab_number(self, hesab_number):
+    @hesab_number.setter
+    def hesab_number(self, hesab_number):
         self._hesab_number = hesab_number
-
-    id = property(get_id, set_id)
-    hesab_type = property(get_hesab_type, set_hesab_type)
-    hesab_number = property(get_hesab_number,set_hesab_number)

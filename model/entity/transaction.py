@@ -26,55 +26,58 @@ class Transaction(Base):
         self.price = price
         self.status = status
 
-    def get_id(self):
+    @property
+    def id(self):
         return self._id
 
-    def set_id(self, id):
+    @id.setter
+    def id(self, id):
         self._id = id
 
-    def get_serial(self):
+    @property
+    def serial(self):
         return self._serial
 
-    def set_serial(self, serial):
+    @serial.setter
+    def serial(self, serial):
         self._serial = serial
 
-    def get_description(self):
+    @property
+    def description(self):
         return self._description
 
-    def set_description(self, description):
+    @description.setter
+    def description(self, description):
         self._description = description
 
-    def get_date(self):
+    @property
+    def date(self):
         return self._date
 
-    def set_date(self, date):
+    @date.setter
+    def date(self, date):
         self._date = date
 
-    def get_payment_gateway(self):
+    @property
+    def payment_gateway(self):
         return self._payment_gateway
 
-    def set_payment_gateway(self, payment_gateway):
+    @payment_gateway.setter
+    def payment_gateway(self, payment_gateway):
         self._payment_gateway = payment_gateway
 
-    def get_price(self):
+    @property
+    def price(self):
         return self._price
 
-    def set_price(self, price):
+    @price.setter
+    def price(self, price):
         self._price = price
 
-    def get_status(self):
+    @property
+    def status(self):
         return self._status
 
-    def set_status(self, status):
-        if isinstance(status, bool):
-            self._status = status
-        else:
-            raise ValueError("Status must be boolean")
-
-    id = property(get_id, set_id)
-    serial = property(get_serial, set_serial)
-    description = property(get_description, set_description)
-    date = property(get_date, set_date)
-    payment_gateway = property(get_payment_gateway, set_payment_gateway)
-    price = property(get_price, set_price)
-    status = property(get_status, set_status)
+    @status.setter
+    def status(self, status):
+        self._status = boolean_validator(status, "Invalid status")

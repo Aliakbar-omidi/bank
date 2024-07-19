@@ -1,14 +1,24 @@
-from tkinter import StringVar, Label,Entry
+from tkinter import *
 
 
 class TextWithLabel:
-    def __init__(self, master, text,x,y,distance=80, disabled = False):
+    def __init__(self, master, text,x,y,distance=80, disabled = False, data_type="str"):
         self.master = master
         self.text = text
         self.x = x
         self.y = y
         self.distance = distance
         self.variable = StringVar()
+
+        match data_type:
+            case "str":
+                self._variable = StringVar()
+            case "int":
+                self._variable = IntVar()
+            case "float":
+                self._variable = DoubleVar()
+            case "bool":
+                self._variable = BooleanVar()
 
         Label(master, text=text).place(x=x, y=y)
 

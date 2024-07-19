@@ -22,38 +22,42 @@ class Card(Base):
         self.expiration_date = expiration_date
         self.password = password
 
-    def get_id(self):
+    @property
+    def id(self):
         return self._id
 
-    def set_id(self, id):
+    @id.setter
+    def id(self, id):
         self._id = id
 
-    def get_number_card(self):
+    @property
+    def number_card(self):
         return self._number_card
 
-    def set_number_card(self, number_card):
+    @number_card.setter
+    def number_card(self, number_card):
         self._number_card = number_card
 
-    def get_cvv2(self):
+    @property
+    def cvv2(self):
         return self._cvv2
 
-    def set_cvv2(self, cvv2):
+    @cvv2.setter
+    def cvv2(self, cvv2):
         self._cvv2 = cvv2
 
-    def get_expiration_date(self):
+    @property
+    def expiration_date(self):
         return self._expiration_date
 
-    def set_expiration_date(self, expiration_date):
-        self._expiration_date = expiration_date
+    @expiration_date.setter
+    def expiration_date(self, expiration_date):
+        self._expiration_date = date_validator(expiration_date, "Invalid date")
 
-    def get_password(self):
+    @property
+    def password(self):
         return self._password
 
-    def set_password(self, password):
+    @password.setter
+    def password(self, password):
         self._password = password
-
-    id = property(get_id, set_id)
-    number_card = property(get_number_card, set_number_card)
-    cvv2 = property(get_cvv2, set_cvv2)
-    expiration_date = property(get_expiration_date, set_expiration_date)
-    password = property(get_password, set_password)

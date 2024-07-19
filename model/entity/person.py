@@ -23,52 +23,58 @@ class Person(Base):
         self.phone = phone
         self.email = email
 
-    def get_id(self):
+    @property
+    def id(self):
         return self._id
 
-    def set_id(self, id):
+    @id.setter
+    def id(self, id):
         self._id = id
 
-    def det_name(self):
+    @property
+    def name(self):
         return self._name
 
-    def set_name(self, name):
-        self._name = name
+    @name.setter
+    def name(self, name):
+        self._name = name_validator(name, "Invalid name")
 
-    def get_family(self):
+    @property
+    def family(self):
         return self._family
 
-    def set_family(self, family):
+    @family.setter
+    def family(self, family):
         self._family = family
 
-    def get_national_id(self):
+    @property
+    def national_id(self):
         return self._national_id
 
-    def set_national_id(self, national_id):
+    @national_id.setter
+    def national_id(self, national_id):
         self._national_id = national_id
 
-    def get_birthday(self):
+    @property
+    def birthday(self):
         return self._birthday
 
-    def set_birthday(self, birthday):
+    @birthday.setter
+    def birthday(self, birthday):
         self._birthday = birthday
 
-    def get_phone(self):
+    @property
+    def phone(self):
         return self._phone
 
+    @phone.setter
     def set_phone(self, phone):
         self._phone = phone
 
-    def get_email(self):
+    @property
+    def email(self):
         return self._email
 
-    def set_email(self, email):
-        self._email = email
-
-    id = property(get_id, set_id)
-    name = property(det_name, set_name)
-    family = property(get_family,set_family)
-    national_id = property(get_national_id, set_national_id)
-    birthday = property(get_birthday, set_birthday)
-    phone = property(get_phone, set_phone)
-    email = property(get_email, set_email)
+    @email.setter
+    def email(self, email):
+        self._email = email_validator(email, "Invalid email")
