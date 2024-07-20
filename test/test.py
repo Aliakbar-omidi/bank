@@ -14,7 +14,7 @@ from controller import *
 # print(AccountController.save_account("jary",122554))
 # print(AccountController.edit_account(5,'edited',545454))
 # print(AccountController.remove_account(4))
-# print(AccountController.find_all())
+print(AccountController.find_all())
 
 # test controller card ok ------------
 # print(CardController.save_card(12213323, 234,'2000-01-01',"21qwq")) #--

@@ -9,6 +9,13 @@ def name_validator(name, message):
         raise ValueError(message)
 
 
+def positive_int_validator(int_value, message):
+    if isinstance(int_value, int) and int_value >= 0:
+        return int_value
+    else:
+        raise ValueError(message)
+
+
 def boolean_validator(bool_value, message):
     if isinstance(bool_value, bool):
         return bool_value

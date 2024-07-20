@@ -16,10 +16,12 @@ class Account(Base):
     _bank_id = Column("bank_id",Integer, ForeignKey("bank_tbl.id"))
     bank = relationship("Bank")
 
-    def __init__(self, hesab_type, hesab_number):
+    def __init__(self, hesab_type, hesab_number, person , bank):
         self.id = None
         self.hesab_type = hesab_type
         self.hesab_number = hesab_number
+        self.person = person
+        self.bank = bank
 
     @property
     def id(self):
