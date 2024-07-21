@@ -2,11 +2,14 @@ from model.service import *
 from model.entity import *
 from model.tools.logger import Logger
 
+
 class AccountController:
     @staticmethod
-    def save_account(hesab_type, hesab_number):
+    def save_account(hesab_type, hesab_number, person, bank):
         try:
             account = Account(hesab_type, hesab_number)
+            account.person = person
+            account.bank = bank
             AccountService.save(account)
             Logger.info(f"Account saved {account}")
             return True,account

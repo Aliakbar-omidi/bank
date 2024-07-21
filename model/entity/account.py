@@ -10,18 +10,16 @@ class Account(Base):
     _hesab_type = Column("hesab_type", String(30), nullable=False)
     _hesab_number = Column("hesab_number", Integer , default=0, nullable=False)
 
-    _person_id = Column("person_id", Integer, ForeignKey("person_tbl.id"))
+    person_id = Column("person_id", Integer, ForeignKey("person_tbl.id"))
     person = relationship("Person")
 
-    _bank_id = Column("bank_id",Integer, ForeignKey("bank_tbl.id"))
+    bank_id = Column("bank_id",Integer, ForeignKey("bank_tbl.id"))
     bank = relationship("Bank")
 
-    def __init__(self, hesab_type, hesab_number, person , bank):
+    def __init__(self, hesab_type, hesab_number):
         self.id = None
         self.hesab_type = hesab_type
         self.hesab_number = hesab_number
-        self.person = person
-        self.bank = bank
 
     @property
     def id(self):

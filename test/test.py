@@ -11,13 +11,15 @@ from controller import *
 # print(BankController.find_all())
 
 # test controller account ok ------------
-# print(AccountController.save_account("jary",122554))
+person = PersonController.find_by_id(1)
+bank = BankController.find_by_id(11)
+print(AccountController.save_account("end",78888, person, bank))
 # print(AccountController.edit_account(5,'edited',545454))
 # print(AccountController.remove_account(4))
 # print(AccountController.find_all())
 
 # test controller card ok ------------
-# print(CardController.save_card(12213323, 234,'2000-01-01',"21qwq")) #--
+# print(CardController.save_card(12213323, 234,'2024-07-21',"21qwq",5)) #--
 # print(CardController.remove_card(8))
 # print(CardController.edit_card(7,90,90,'2010-10-10',"g62"))
 # print(CardController.find_all())  #--

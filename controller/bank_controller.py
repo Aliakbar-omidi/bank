@@ -1,5 +1,6 @@
 from model.service import *
 from model.entity import *
+from model.tools.decorators import exception_handling
 from model.tools.logger import Logger
 
 
@@ -46,3 +47,8 @@ class BankController:
         except Exception as e:
             Logger.error(f"{e}")
             return False, f"{e}"
+
+    @staticmethod
+    @exception_handling
+    def find_by_id(id):
+        return BankService.find_by_id(id)

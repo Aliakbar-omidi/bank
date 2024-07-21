@@ -15,12 +15,13 @@ class Card(Base):
     _account_id = Column("account_id", Integer, ForeignKey("account_tbl.id"))
     account = relationship("Account")
 
-    def __init__(self, number_card, cvv2, expiration_date, password):
+    def __init__(self, number_card, cvv2, expiration_date, password, account_id):
         self.id = None
         self.number_card = number_card
         self.cvv2 = cvv2
         self.expiration_date = expiration_date
         self.password = password
+        self.account_id = account_id
 
     @property
     def id(self):
@@ -52,7 +53,7 @@ class Card(Base):
 
     @expiration_date.setter
     def expiration_date(self, expiration_date):
-        self._expiration_date = date_validator(expiration_date, "Invalid date")
+        self._expiration_date = expiration_date
 
     @property
     def password(self):
@@ -61,3 +62,11 @@ class Card(Base):
     @password.setter
     def password(self, password):
         self._password = password
+
+    @property
+    def account_id(self):
+        return self._account_id
+
+    @account_id.setter
+    def account_id(self, account_id):
+        self._account_id = account_id
