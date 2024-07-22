@@ -5,9 +5,10 @@ from model.tools.logger import Logger
 
 class CheckController:
     @staticmethod
-    def save_check(check_serial, price, national_id, date_now, date_end):
+    def save_check(check_serial, price, national_id, date_now, date_end, account):
         try:
             check = Check(check_serial, price, national_id, date_now, date_end)
+            check.account = account
             CheckService.save(check)
             Logger.info(f"check saved {check}")
             return True,check

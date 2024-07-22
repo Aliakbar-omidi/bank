@@ -6,15 +6,15 @@ from model.tools.validator import *
 
 class Check(Base):
     __tablename__ = 'check_tbl'
-    _id = Column("id",Integer, primary_key=True, autoincrement=True)
+    _id = Column("id", Integer, primary_key=True, autoincrement=True)
     _check_serial = Column("check_serial", Integer)
     _price = Column("price", Integer)
     _national_id = Column("national_id", Integer, unique=True)
     _date_now = Column("date_now", Date)
     _date_end = Column("date_end", Date)
 
-    # _account_id = Column("account_id", Integer, ForeignKey("account_tbl.id"))
-    # account = relationship("Account")
+    _account_id = Column("account_id", Integer, ForeignKey("account_tbl.id"))
+    account = relationship("Account")
 
     def __init__(self, check_serial, price, national_id, date_now, date_end):
         self.id = None
@@ -71,3 +71,11 @@ class Check(Base):
     @date_end.setter
     def date_end(self, date_end):
         self._date_end = date_validator(date_end,"Invalid date")
+
+    @property
+    def account_id(self):
+        return self._account_id
+
+    @account_id.setter
+    def account_id(self, account_id):
+        self._account_id = account_id

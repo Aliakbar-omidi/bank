@@ -5,9 +5,10 @@ from model.tools.logger import Logger
 
 class TransactionController:
     @staticmethod
-    def save_transaction(serial, description, date_time, payment_gateway, price, status):
+    def save_transaction(serial, description, date_time, payment_gateway, price, status,account):
         try:
             transaction = Transaction(serial, description, date_time, payment_gateway, price, status)
+            transaction.account = account
             TransactionService.save(transaction)
             Logger.info(f"transaction saved {transaction}")
             return True,transaction

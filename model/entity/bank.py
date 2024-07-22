@@ -58,7 +58,7 @@ class Bank(Base):
 
     @start_time.setter
     def start_time(self, start_time):
-        self._start_time = time_validator(start_time, "Invalid time")
+        self._start_time = start_time
 
     @property
     def end_time(self):
@@ -66,7 +66,7 @@ class Bank(Base):
 
     @end_time.setter
     def end_time(self, end_time):
-        self._end_time = time_validator(end_time, "Invalid time")
+        self._end_time = end_time
 
     @property
     def branch(self):

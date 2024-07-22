@@ -81,3 +81,11 @@ class Transaction(Base):
     @status.setter
     def status(self, status):
         self._status = boolean_validator(status, "Invalid status")
+
+    @property
+    def account_id(self):
+        return self._account_id
+
+    @account_id.setter
+    def account_id(self, account_id):
+        self._account_id = account_id

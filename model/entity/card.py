@@ -15,13 +15,12 @@ class Card(Base):
     _account_id = Column("account_id", Integer, ForeignKey("account_tbl.id"))
     account = relationship("Account")
 
-    def __init__(self, number_card, cvv2, expiration_date, password, account_id):
+    def __init__(self, number_card, cvv2, expiration_date, password):
         self.id = None
         self.number_card = number_card
         self.cvv2 = cvv2
         self.expiration_date = expiration_date
         self.password = password
-        self.account_id = account_id
 
     @property
     def id(self):
