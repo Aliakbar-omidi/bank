@@ -2,7 +2,7 @@ from tkinter import *
 
 
 class TextWithLabel:
-    def __init__(self, master, text,x,y,distance=80, disabled = False, data_type="str"):
+    def __init__(self, master, text,x,y,distance=100, disabled = False, data_type="str"):
         self.master = master
         self.text = text
         self.x = x
