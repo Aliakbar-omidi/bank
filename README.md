@@ -5,7 +5,7 @@
 
 
 install ----                                                                                                                                                                         
-  # python
+  # Python
 
   # MySQL
 
