@@ -65,3 +65,4 @@ class TransactionView:
         self.reset_form()
 
         self.win.mainloop()
+
