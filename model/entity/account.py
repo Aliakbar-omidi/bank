@@ -18,6 +18,8 @@ class Account(Base):
         self.id = None
         self.hesab_type = hesab_type
         self.hesab_number = hesab_number
+        self.person_id = None
+        self.bank_id = None
 
     @property
     def id(self):

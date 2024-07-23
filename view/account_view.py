@@ -14,6 +14,7 @@ class AccountView:
                                   values=(account.hesab_type, account.hesab_number, account.person_id, account.bank_id))
 
     def save_click(self):
+        print(self.hesab_type.variable.get())
         status, result = AccountController.save_account(int(self.hesab_type.variable.get()),
                                                         int(self.hesab_number.variable.get()),
                                                         int(self.person_id.variable.get()),

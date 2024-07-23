@@ -5,11 +5,11 @@ from model.tools.logger import Logger
 
 class AccountController:
     @staticmethod
-    def save_account(hesab_type, hesab_number, person, bank):
+    def save_account(hesab_type, hesab_number, person_id, bank_id):
         try:
             account = Account(hesab_type, hesab_number)
-            account.person = person
-            account.bank = bank
+            account.person_id = person_id
+            account.bank_id = bank_id
             AccountService.save(account)
             Logger.info(f"Account saved {account}")
             return True,account
