@@ -5,9 +5,9 @@ from model.tools.logger import Logger
 
 class CheckController:
     @staticmethod
-    def save_check(check_serial, price, national_id, date_now, date_end, account):
+    def save_check(check_serial, price, date_now, date_end, account):
         try:
-            check = Check(check_serial, price, national_id, date_now, date_end)
+            check = Check(check_serial, price, date_now, date_end)
             check.account = account
             CheckService.save(check)
             Logger.info(f"check saved {check}")
@@ -17,9 +17,9 @@ class CheckController:
             return False, f"{e}"
 
     @staticmethod
-    def edit_check(id,check_serial, price, national_id, date_now, date_end):
+    def edit_check(id,check_serial, price, date_now, date_end):
         try:
-            check = Check(check_serial, price, national_id, date_now, date_end)
+            check = Check(check_serial, price, date_now, date_end)
             check.id = id
             CheckService.edit(check)
             Logger.info(f"check edited {check}")

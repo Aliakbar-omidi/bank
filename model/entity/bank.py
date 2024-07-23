@@ -1,8 +1,5 @@
-from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, Time
+
 from model.entity import *
-from sqlalchemy.orm import relationship
-from model.tools.validator import *
-import re
 
 
 class Bank(Base):
@@ -16,7 +13,7 @@ class Bank(Base):
     _number_branch = Column("number_branch", Integer)
     _status = Column("status", Boolean)
 
-    account = relationship("Account")
+    account = relationship("Account",back_populates="bank")
 
     def __init__(self, name, location, start_time, end_time, branch, number_branch, status):
         self.id = None

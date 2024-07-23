@@ -1,7 +1,5 @@
-from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, Date
+
 from model.entity import *
-from sqlalchemy.orm import relationship
-from model.tools.validator import *
 
 
 class Person(Base):
@@ -10,18 +8,18 @@ class Person(Base):
     _name = Column("name", String(30))
     _family = Column("family", String(30))
     _national_id = Column("national_id", Integer)
-    _birthday = Column("birthday", Date)
+    _birthdate = Column("birthdate", Date)
     _phone = Column("phone", Integer)
     _email = Column("email", String(30))
 
-    account = relationship("Account")
+    account = relationship("Account",back_populates="person")
 
-    def __init__(self, name, family, national_id, birthday, phone, email):
+    def __init__(self, name, family, national_id, birthdate, phone, email):
         self.id = None
         self.name = name
         self.family = family
         self.national_id = national_id
-        self.birthday = birthday
+        self.birthdate = birthdate
         self.phone = phone
         self.email = email
 
@@ -58,12 +56,12 @@ class Person(Base):
         self._national_id = national_id
 
     @property
-    def birthday(self):
-        return self._birthday
+    def birthdate(self):
+        return self._birthdate
 
-    @birthday.setter
-    def birthday(self, birthday):
-        self._birthday = birthday
+    @birthdate.setter
+    def birthdate(self, birthdate):
+        self._birthdate = birthdate
 
     @property
     def phone(self):

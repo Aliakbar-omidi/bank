@@ -11,10 +11,10 @@ class PersonView:
         status, person_list = PersonController.find_all()
         if status:
             for person in person_list:
-                self.table.insert("", END, values=(person.name, person.family, person.national_id, person.birthday, person.phone, person.email))
+                self.table.insert("", END, values=(person.name, person.family, person.national_id, person.birthdate, person.phone, person.email))
 
     def save_click(self):
-        status, result = PersonController.save_person(self.name.get(), self.family.get(), self.national_id.get(), self.birthday.get(),self.phone.get(),self.email.get())
+        status, result = PersonController.save_person(self.name.get(), self.family.get(), self.national_id.get(), self.birthdate.get(),self.phone.get(),self.email.get())
         if status:
             msg.showinfo("person saved!", result)
             self.reset_form()
@@ -32,7 +32,7 @@ class PersonView:
 
         national_id = TextWithLabel(self.win, "national id: ", 20, 100)
 
-        birthday = TextWithLabel(self.win, "birthday: ", 20, 140)
+        birthdate = TextWithLabel(self.win, "birthdate: ", 20, 140)
 
         phone = TextWithLabel(self.win, "phone: ", 20, 180)
 
@@ -53,7 +53,7 @@ class PersonView:
         self.table.heading(1, text="name")
         self.table.heading(2, text="family")
         self.table.heading(3, text="national id")
-        self.table.heading(4, text="birthday")
+        self.table.heading(4, text="birthdate")
         self.table.heading(5, text="phone")
         self.table.heading(6, text="email")
 

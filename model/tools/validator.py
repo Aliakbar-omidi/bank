@@ -37,7 +37,7 @@ def date_validator(date_value, message):
         raise ValueError(message)
 
 
-def national_id__validator(natonal_id_value, message):
+def national_id_validator(natonal_id_value, message):
     if isinstance(natonal_id_value, str) and re.match(r"^\d{10}$", natonal_id_value):
         return natonal_id_value
     else:

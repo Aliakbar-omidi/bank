@@ -1,3 +1,5 @@
+from datetime import date
+
 from model.da.da import DataAccess
 from model.entity import *
 from controller import *
@@ -36,7 +38,8 @@ from controller import *
 
 # test controller check ok ------------
 # account = AccountController.find_by_id(18)
-# print(CheckController.save_check(122133, 20000, 3525, '2001-01-01', '2010-20-21',account)) #--
+# d = date(2020, 1, 1)
+# print(CheckController.save_check(122133, 20000,  d, d, account))
 # print(CheckController.edit_check(9, 6666, 3525, 3232,'2001-11-22','2002-10-20'))
 # print(CheckController.remove_check(9))
 # print(CheckController.find_all())

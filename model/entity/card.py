@@ -1,7 +1,5 @@
-from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, Date
+
 from model.entity import *
-from sqlalchemy.orm import relationship
-from model.tools.validator import *
 
 
 class Card(Base):
