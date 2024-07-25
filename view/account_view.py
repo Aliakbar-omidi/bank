@@ -15,16 +15,15 @@ class AccountView:
                                   values=(account.id,account.hesab_type, account.hesab_number, account.person_id, account.bank_id))
 
     def remove_account(self):
-        entered_value = self.remove_row.variable.get()
-        print(entered_value)
-        AccountController.remove_account(entered_value)
+        get_id = self.remove_row.variable.get()
+        AccountController.remove_account(get_id)
         msg.showinfo('Account removed')
         self.reset_form()
 
     def edit_account(self):
         result = AccountController.edit_account(self.account_id.variable.get(), self.hesab_type.variable.get(), self.hesab_number.variable.get(), self.person_id.variable.get(), self.bank_id.variable.get())
         if result:
-            msg.showinfo('Account edited', result)
+            msg.showinfo("Edit", 'Account edited')
             self.reset_form()
         elif result.startswith("False"):
             msg.showerror("Error", result)

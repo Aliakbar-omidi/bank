@@ -5,10 +5,10 @@ from model.tools.logger import Logger
 
 class CardController:
     @staticmethod
-    def save_card(number_card, cvv2, expiration_date, password, account):
+    def save_card(number_card, cvv2, expiration_date, password, account_id):
         try:
             card = Card(number_card, cvv2, expiration_date, password)
-            card.account = account
+            card.account_id = account_id
             CardService.save(card)
             Logger.info(f"card saved {card}")
             return True,card
@@ -17,10 +17,11 @@ class CardController:
             return False, f"{e}"
 
     @staticmethod
-    def edit_card(id, number_card, cvv2, expiration_date, password):
+    def edit_card(id, number_card, cvv2, expiration_date, password, account_id):
         try:
             card = Card(number_card, cvv2, expiration_date, password)
             card.id = id
+            card.account_id = account_id
             CardService.edit(card)
             Logger.info(f"card edited {card}")
             return True,card

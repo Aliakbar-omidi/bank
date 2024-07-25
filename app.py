@@ -1,7 +1,7 @@
 from view import *
 print("App started")
 
-ui = AccountView()
+ui = CardView()
 ui.show()
 
 print("App ended")

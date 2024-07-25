@@ -87,4 +87,4 @@ class Bank(Base):
 
     @status.setter
     def status(self, status):
-        self._status = boolean_validator(status,"Invalid status")
+        self._status = boolean_validator(status,"Invalid status4")
