@@ -18,17 +18,18 @@ class AccountController:
             return False, f"{e}"
 
     @staticmethod
-    def edit_account(id, hesab_type, hesab_number):
+    def edit_account(id, hesab_type, hesab_number,person_id, bank_id):
         try:
             account = Account(hesab_type, hesab_number)
             account.id = id
+            account.person_id = person_id
+            account.bank_id = bank_id
             AccountService.edit(account)
             Logger.info(f"Account edited {account}")
             return True,account
         except Exception as e:
             Logger.error(f"{e}")
             return False, f"{e}"
-
 
     @staticmethod
     def remove_account(id):

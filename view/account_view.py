@@ -7,18 +7,30 @@ from view.component.label_text import TextWithLabel
 
 class AccountView:
     def reset_form(self):
-        status, account_list = AccountController.find_all()
+        self.table.delete(*self.table.get_children())          # پاک کردن تمام ردیف ‌های جدول
+        status, account_list = AccountController.find_all()    # بازیابی مقادیر جدید و اضافه کردن به جدول
         if status:
             for account in account_list:
                 self.table.insert("", END,
-                                  values=(account.hesab_type, account.hesab_number, account.person_id, account.bank_id))
+                                  values=(account.id,account.hesab_type, account.hesab_number, account.person_id, account.bank_id))
+
+    def remove_account(self):
+        entered_value = self.remove_row.variable.get()
+        print(entered_value)
+        AccountController.remove_account(entered_value)
+        msg.showinfo('Account removed')
+        self.reset_form()
+
+    def edit_account(self):
+        result = AccountController.edit_account(self.account_id.variable.get(), self.hesab_type.variable.get(), self.hesab_number.variable.get(), self.person_id.variable.get(), self.bank_id.variable.get())
+        if result:
+            msg.showinfo('Account edited', result)
+            self.reset_form()
+        elif result.startswith("False"):
+            msg.showerror("Error", result)
 
     def save_click(self):
-        print(self.hesab_type.variable.get())
-        status, result = AccountController.save_account(int(self.hesab_type.variable.get()),
-                                                        int(self.hesab_number.variable.get()),
-                                                        int(self.person_id.variable.get()),
-                                                        int(self.bank_id.variable.get()))
+        status, result = AccountController.save_account(self.hesab_type.variable.get(), self.hesab_number.variable.get(), self.person_id.variable.get(), self.bank_id.variable.get())
         if status:
             msg.showinfo("account saved!", result)
             self.reset_form()
@@ -28,33 +40,39 @@ class AccountView:
     def show(self):
         self.win = Tk()
         self.win.title("account View")
-        self.win.geometry("800x300")
+        self.win.geometry("900x300")
 
-        self.hesab_type = TextWithLabel(self.win, "hesab type: ", 20, 20)
+        self.account_id = TextWithLabel(self.win, "account id: ", 20, 20)
 
-        self.hesab_number = TextWithLabel(self.win, "hesab number: ", 20, 60)
+        self.hesab_type = TextWithLabel(self.win, "hesab type: ", 20, 60)
 
-        self.person_id = TextWithLabel(self.win, "person id: ", 20, 100)
+        self.hesab_number = TextWithLabel(self.win, "hesab number: ", 20, 100)
 
-        self.bank_id = TextWithLabel(self.win, "bank id: ", 20, 140)
+        self.person_id = TextWithLabel(self.win, "person id: ", 20, 140)
 
-        Button(self.win, text="save", command=self.save_click).place(x=20, y=250)
+        self.bank_id = TextWithLabel(self.win, "bank id: ", 20, 180)
 
-        Button(self.win, text="Edit").place(x=100, y=250)
+        self.remove_row = TextWithLabel(self.win, "id for remove: ", 320, 240)
 
-        Button(self.win, text="Remove").place(x=180, y=250)
+        Button(self.win, text="save", command=self.save_click).place(x=20, y=240)
 
-        self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4), show="headings")
+        Button(self.win, text="Edit", command=self.edit_account).place(x=100, y=240)
 
-        self.table.column(1, width=100)
+        Button(self.win, text="Remove", command=self.remove_account).place(x=620, y=240)
+
+        self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4,5), show="headings")
+
+        self.table.column(1, width=70)
         self.table.column(2, width=100)
         self.table.column(3, width=100)
         self.table.column(4, width=100)
+        self.table.column(5, width=100)
 
-        self.table.heading(1, text="hesab type")
-        self.table.heading(2, text="hesab number")
-        self.table.heading(3, text="person id")
-        self.table.heading(4, text="bank id")
+        self.table.heading(1, text="account id")
+        self.table.heading(2, text="hesab type")
+        self.table.heading(3, text="hesab number")
+        self.table.heading(4, text="person id")
+        self.table.heading(5, text="bank id")
 
         self.table.place(x=320, y=20)
 

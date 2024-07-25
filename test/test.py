@@ -38,6 +38,7 @@ from controller import *
 
 # test controller check ok ------------
 # account = AccountController.find_by_id(18)
+# print(account)
 # d = date(2020, 1, 1)
 # print(CheckController.save_check(122133, 20000,  d, d, account))
 # print(CheckController.edit_check(9, 6666, 3525, 3232,'2001-11-22','2002-10-20'))
