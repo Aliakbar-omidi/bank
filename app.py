@@ -1,7 +1,7 @@
 from view import *
 print("App started")
 
-ui = CardView()
+ui = CheckView()
 ui.show()
 
 print("App ended")

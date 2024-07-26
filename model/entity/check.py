@@ -50,7 +50,7 @@ class Check(Base):
 
     @date_now.setter
     def date_now(self, date_now):
-        self._date_now = date_validator(date_now,"Invalid date")
+        self._date_now = date_now
 
     @property
     def date_end(self):
@@ -58,7 +58,7 @@ class Check(Base):
 
     @date_end.setter
     def date_end(self, date_end):
-        self._date_end = date_validator(date_end,"Invalid date")
+        self._date_end = date_end
 
     @property
     def account_id(self):
