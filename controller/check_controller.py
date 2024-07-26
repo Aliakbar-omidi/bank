@@ -17,7 +17,7 @@ class CheckController:
             return False, f"{e}"
 
     @staticmethod
-    def edit_check(id,check_serial, price, date_now, date_end, account_id):
+    def edit_check(id, check_serial, price, date_now, date_end, account_id):
         try:
             check = Check(check_serial, price, date_now, date_end)
             check.id = id

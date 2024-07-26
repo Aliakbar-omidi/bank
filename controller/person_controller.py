@@ -7,15 +7,15 @@ from model.tools.decorators import exception_handling
 class PersonController:
     @staticmethod
     @exception_handling
-    def save_person(name, family, national_id, birthday, phone, email):
-            person = Person(name, family, national_id, birthday, phone, email)
+    def save_person(name, family, national_id, birthdate, phone, email):
+            person = Person(name, family, national_id, birthdate, phone, email)
             PersonService.save(person)
             Logger.info(f"person saved {person}")
             return True, person
 
     @staticmethod
-    def edit_person(id, name, family, national_id, birthday, phone, email):
-        person = Person(name, family, national_id, birthday, phone, email)
+    def edit_person(id, name, family, national_id, birthdate, phone, email):
+        person = Person(name, family, national_id, birthdate, phone, email)
         person.id = id
         PersonService.edit(person)
         Logger.info(f"person edited {person}")

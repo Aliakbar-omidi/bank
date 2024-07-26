@@ -1,7 +1,7 @@
 from view import *
 print("App started")
 
-ui = CheckView()
+ui = PersonView()
 ui.show()
 
 print("App ended")

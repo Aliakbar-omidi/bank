@@ -23,13 +23,18 @@ class CheckView:
             msg.showerror("Error", result)
 
     def edit_check(self):
-        result = CheckController.edit_check(self.id.variable.get(), self.check_serial.variable.get(), self.price.variable.get(), self.date_now.variable.get(),self.date_end.variable.get(),self.account_id.variable.get())
-        print(result)
+        result = CheckController.edit_check(self.id.variable.get(), self.check_serial.variable.get(), self.price.variable.get(), self.date_now.variable.get(),self.date_end.variable.get(), self.account_id.variable.get())
         if result:
-            msg.showinfo("Edit",f"check edited? \n {result}")
+            msg.showinfo("Edit", f"check edited? \n {result}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
+
+    def remove_check(self):
+        get_id = self.remove_row.variable.get()
+        CheckController.remove_check(get_id)
+        msg.showinfo("Remove", "check removed?")
+        self.reset_form()
 
     def show(self):
         self.win = Tk()
@@ -54,7 +59,7 @@ class CheckView:
 
         Button(self.win, text= "Edit", command=self.edit_check).place(x=100 , y=275)
 
-        Button(self.win, text= "Remove").place(x=650 , y=275)
+        Button(self.win, text= "Remove", command = self.remove_check).place(x=650 , y=275)
 
         self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4, 5, 6), show="headings")
 
