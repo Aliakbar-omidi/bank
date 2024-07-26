@@ -18,7 +18,7 @@ class BankView:
         status_bool = True if status_value == "True" else False  # تبدیل به مقدار منطقی
         status, result = BankController.save_bank(self.name.variable.get(), self.location.variable.get(),self.start_time.variable.get(), self.end_time.variable.get(),self.branch.variable.get(), self.number_branch.variable.get(),status_bool)
         if status:
-            msg.showinfo("Bank saved!", result)
+            msg.showinfo("Save",f"Bank saved? \n {result}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
@@ -28,7 +28,7 @@ class BankView:
         status_bool = True if status_value == "True" else False  # تبدیل به مقدار منطقی
         result = BankController.edit_bank(self.id.variable.get(), self.name.variable.get(), self.location.variable.get(), self.start_time.variable.get(), self.end_time.variable.get(), self.branch.variable.get(), self.number_branch.variable.get(), status_bool)
         if result:
-            msg.showinfo("Bank saved!", result)
+            msg.showinfo("Edit",f"Bank edited? \n {result}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)

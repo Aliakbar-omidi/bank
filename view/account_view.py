@@ -14,27 +14,27 @@ class AccountView:
                 self.table.insert("", END,
                                   values=(account.id,account.hesab_type, account.hesab_number, account.person_id, account.bank_id))
 
+    def save_click(self):
+        status, result = AccountController.save_account(self.hesab_type.variable.get(), self.hesab_number.variable.get(), self.person_id.variable.get(), self.bank_id.variable.get())
+        if status:
+            msg.showinfo("Edit",f"Account saved? \n {result}")
+            self.reset_form()
+        elif result.startswith("Error"):
+            msg.showerror("Error", result)
+
+    def edit_account(self):
+        result = AccountController.edit_account(self.account_id.variable.get(), self.hesab_type.variable.get(), self.hesab_number.variable.get(), self.person_id.variable.get(), self.bank_id.variable.get())
+        if result:
+            msg.showinfo("Edit", f"Account edited? \n {result}")
+            self.reset_form()
+        elif result.startswith("False"):
+            msg.showerror("Error", result)
+
     def remove_account(self):
         get_id = self.remove_row.variable.get()
         AccountController.remove_account(get_id)
         msg.showinfo('Account removed')
         self.reset_form()
-
-    def edit_account(self):
-        result = AccountController.edit_account(self.account_id.variable.get(), self.hesab_type.variable.get(), self.hesab_number.variable.get(), self.person_id.variable.get(), self.bank_id.variable.get())
-        if result:
-            msg.showinfo("Edit", 'Account edited')
-            self.reset_form()
-        elif result.startswith("False"):
-            msg.showerror("Error", result)
-
-    def save_click(self):
-        status, result = AccountController.save_account(self.hesab_type.variable.get(), self.hesab_number.variable.get(), self.person_id.variable.get(), self.bank_id.variable.get())
-        if status:
-            msg.showinfo("account saved!", result)
-            self.reset_form()
-        elif result.startswith("Error"):
-            msg.showerror("Error", result)
 
     def show(self):
         self.win = Tk()

@@ -17,7 +17,7 @@ class CardView:
     def save_click(self):
         status, result = CardController.save_card(self.number_card.variable.get(), self.cvv2.variable.get(), self.expiration_date.variable.get(), self.password.variable.get(),self.account_id.variable.get())
         if status:
-            msg.showinfo("card saved!", result)
+            msg.showinfo("Save",f"card saved? \n {result}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
