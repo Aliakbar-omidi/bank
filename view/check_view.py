@@ -33,7 +33,7 @@ class CheckView:
     def remove_check(self):
         get_id = self.remove_row.variable.get()
         CheckController.remove_check(get_id)
-        msg.showinfo("Remove", "check removed?")
+        msg.showinfo("Remove", f"check removed?")
         self.reset_form()
 
     def show(self):

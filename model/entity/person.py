@@ -7,7 +7,7 @@ class Person(Base):
     _id = Column("id", Integer, primary_key=True, autoincrement=True)
     _name = Column("name", String(30))
     _family = Column("family", String(30))
-    _national_id = Column("national_id", Integer)
+    _national_id = Column("national_id", Integer, unique=True)
     _birthdate = Column("birthdate", Date)
     _phone = Column("phone", Integer)
     _email = Column("email", String(30))

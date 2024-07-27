@@ -17,7 +17,7 @@ class PersonView:
     def save_click(self):
         status, result = PersonController.save_person(self.name.variable.get(), self.family.variable.get(), self.national_id.variable.get(), self.birthdate.variable.get(),self.phone.variable.get(),self.email.variable.get())
         if status:
-            msg.showinfo("person saved!", result)
+            msg.showinfo("save",f"person saved? \n {result}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
@@ -25,17 +25,23 @@ class PersonView:
     def edit_person(self):
         result = PersonController.edit_person(self.id.variable.get(),self.name.variable.get(), self.family.variable.get(), self.national_id.variable.get(), self.birthdate.variable.get(),self.phone.variable.get(),self.email.variable.get())
         if result:
-            msg.showinfo("Edit",f"person saved? {result}")
+            msg.showinfo("Edit",f"person saved? \n {result}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
+
+    def remove_person(self):
+        get_id = self.remove_row.variable.get()
+        PersonController.remove_person(get_id)
+        msg.showinfo("Remove", "check removed?")
+        self.reset_form()
 
     def show(self):
         self.win = Tk()
         self.win.title("person View")
         self.win.geometry("1100x400")
 
-        self.id = TextWithLabel(self.win, "ID For Remove: ", 20, 20)
+        self.id = TextWithLabel(self.win, "ID For ٍEdit: ", 20, 20)
 
         self.name = TextWithLabel(self.win, "name: ", 20, 60)
 
@@ -49,9 +55,13 @@ class PersonView:
 
         self.email = TextWithLabel(self.win, "email: ", 20, 260)
 
+        self.remove_row = TextWithLabel(self.win, "ID For Remove:",360, 260)
+
         Button(self.win, text= "save", command=self.save_click).place(x=20 , y=340)
 
         Button(self.win, text= "edit", command=self.edit_person).place(x=100 , y=340)
+
+        Button(self.win, text= "remove", command=self.remove_person).place(x=660 , y=260)
 
         self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4, 5, 6, 7), show="headings")
 
@@ -62,7 +72,6 @@ class PersonView:
         self.table.column(5, width=100)
         self.table.column(6, width=140)
         self.table.column(7, width=140)
-
 
         self.table.heading(1, text="id")
         self.table.heading(2, text="name")
