@@ -1,7 +1,7 @@
 from view import *
 print("App started")
 
-ui = PersonView()
+ui = TransactionView()
 ui.show()
 
 print("App ended")
