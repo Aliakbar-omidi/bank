@@ -41,7 +41,7 @@ class Check(Base):
         return self._price
 
     @price.setter
-    def price(self,price):
+    def price(self, price):
         self._price = price
 
     @property

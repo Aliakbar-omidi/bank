@@ -4,6 +4,7 @@ from tkinter import *
 import tkinter.messagebox as msg
 import tkinter.ttk as ttk
 from view.component.label_text import TextWithLabel
+from view import *
 
 
 class PersonView:
@@ -36,6 +37,10 @@ class PersonView:
         msg.showinfo("Remove", "check removed?")
         self.reset_form()
 
+    # def show_account(self):
+    #     ui = AccountView()
+    #     ui.show()
+
     def show(self):
         self.win = Tk()
         self.win.title("person View")
@@ -62,6 +67,8 @@ class PersonView:
         Button(self.win, text= "edit", command=self.edit_person).place(x=100 , y=340)
 
         Button(self.win, text= "remove", command=self.remove_person).place(x=660 , y=260)
+
+        # Button(self.win, text= "create account", command=self.show_account).place(x=300 , y=340)
 
         self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4, 5, 6, 7), show="headings")
 

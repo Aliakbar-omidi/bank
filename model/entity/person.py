@@ -37,7 +37,7 @@ class Person(Base):
 
     @name.setter
     def name(self, name):
-        self._name = name_validator(name, "Invalid name")
+        self._name = name
 
     @property
     def family(self):
@@ -77,4 +77,4 @@ class Person(Base):
 
     @email.setter
     def email(self, email):
-        self._email = email_validator(email, "Invalid email")
+        self._email = email
