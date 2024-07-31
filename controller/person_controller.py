@@ -14,14 +14,6 @@ class PersonController:
             return True, person
 
     @staticmethod
-    def edit_person(id, name, family, national_id, birthdate, phone, email):
-        person = Person(name, family, national_id, birthdate, phone, email)
-        person.id = id
-        PersonService.edit(person)
-        Logger.info(f"person edited {person}")
-        return True, person
-
-    @staticmethod
     @exception_handling
     def remove_person(id):
         person = PersonService.remove(id)
@@ -34,6 +26,15 @@ class PersonController:
         person_list = PersonService.find_all()
         Logger.info(f"person FindAll")
         return True, person_list
+
+    @staticmethod
+    @exception_handling
+    def edit_person(id, name, family, national_id, birthdate, phone, email):
+        person = Person(name, family, national_id, birthdate, phone, email)
+        person.id = id
+        PersonService.edit(person)
+        Logger.info(f"person edited {person}")
+        return True, person
 
     @staticmethod
     @exception_handling

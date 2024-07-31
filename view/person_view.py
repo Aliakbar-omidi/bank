@@ -18,23 +18,25 @@ class PersonView:
     def save_click(self):
         status, result = PersonController.save_person(self.name.variable.get(), self.family.variable.get(), self.national_id.variable.get(), self.birthdate.variable.get(),self.phone.variable.get(),self.email.variable.get())
         if status:
-            msg.showinfo("save",f"person saved? \n {result}")
+            msg.showinfo("save", f"person saved? \n {result}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
 
     def edit_person(self):
-        result = PersonController.edit_person(self.id.variable.get(),self.name.variable.get(), self.family.variable.get(), self.national_id.variable.get(), self.birthdate.variable.get(),self.phone.variable.get(),self.email.variable.get())
+        result = PersonController.edit_person(self.id.variable.get(), self.name.variable.get(), self.family.variable.get(), self.national_id.variable.get(), self.birthdate.variable.get(), self.phone.variable.get(), self.email.variable.get())
+        print("wqwqw", result)
         if result:
-            msg.showinfo("Edit",f"person saved? \n {result}")
+            msg.showinfo("Edit", f"person edited? \n {result}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
 
     def remove_person(self):
         get_id = self.remove_row.variable.get()
+        print("jkj", get_id)
+        msg.showinfo("Remove", f"Should the check with ID {get_id} be deleted?")
         PersonController.remove_person(get_id)
-        msg.showinfo("Remove", "check removed?")
         self.reset_form()
 
     # def show_account(self):
@@ -62,11 +64,11 @@ class PersonView:
 
         self.remove_row = TextWithLabel(self.win, "ID For Remove:",360, 260)
 
-        Button(self.win, text= "save", command=self.save_click).place(x=20 , y=340)
+        Button(self.win, text="save", command=self.save_click).place(x=20 , y=340)
 
-        Button(self.win, text= "edit", command=self.edit_person).place(x=100 , y=340)
+        Button(self.win, text="edit", command=self.edit_person).place(x=100 , y=340)
 
-        Button(self.win, text= "remove", command=self.remove_person).place(x=660 , y=260)
+        Button(self.win, text="remove", command=self.remove_person).place(x=660 , y=260)
 
         # Button(self.win, text= "create account", command=self.show_account).place(x=300 , y=340)
 
