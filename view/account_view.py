@@ -18,14 +18,10 @@ class AccountView:
         if status:
             for account in account_list:
                 self.table.insert("", END,
-                                  values=(account.id,account.hesab_type, account.hesab_number, account.person_id, account.bank_id))
+                                  values=(account.id, account.hesab_type, account.hesab_number, account.person_id, account.bank_id))
 
     def save_click(self):
-        hesab_type = self.hesab_type.variable.get()
-        hesab_number = self.hesab_number.variable.get()
-        person_id = self.person_id.variable.get()
-        bank_id = self.bank_id.variable.get()
-        status, result = AccountController.save_account(hesab_type, hesab_number, person_id, bank_id)
+        status, result = AccountController.save_account(self.hesab_type._variable.get(), self.hesab_number._variable.get(), self.person_id._variable.get(), self.bank_id._variable.get())
         if status:
             msg.showinfo("Edit", f"Account saved? \n {result}")
             self.reset_form()
@@ -33,7 +29,7 @@ class AccountView:
             msg.showerror("Error", result)
 
     def edit_account(self):
-        result = AccountController.edit_account(self.account_id.variable.get(), self.hesab_type.variable.get(), self.hesab_number.variable.get(), self.person_id.variable.get(), self.bank_id.variable.get())
+        result = AccountController.edit_account(self.account_id._variable.get(), self.hesab_type._variable.get(), self.hesab_number._variable.get(), self.person_id._variable.get(), self.bank_id._variable.get())
         if result:
             msg.showinfo("Edit", f"Account edited? \n {result}")
             self.reset_form()
@@ -41,9 +37,9 @@ class AccountView:
             msg.showerror("Error", result)
 
     def remove_account(self):
-        get_id = self.remove_row.variable.get()
+        get_id = self.remove_row._variable.get()
         AccountController.remove_account(get_id)
-        msg.showinfo('Account removed')
+        msg.showinfo("Remove","Account removed?")
         self.reset_form()
 
     def show(self):
