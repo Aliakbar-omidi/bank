@@ -1,3 +1,4 @@
+
 from controller import *
 from tkinter import *
 import tkinter.messagebox as msg
@@ -9,8 +10,6 @@ from view.component.label_text import TextWithLabel
 
 
 class AccountView:
-    def __init__(self):
-        self.Account = DataAccess(Account)
 
     def reset_form(self):
         self.table.delete(*self.table.get_children())
@@ -23,7 +22,13 @@ class AccountView:
     def save_click(self):
         status, result = AccountController.save_account(self.hesab_type._variable.get(), self.hesab_number._variable.get(), self.person_id._variable.get(), self.bank_id._variable.get())
         if status:
-            msg.showinfo("Edit", f"Account saved? \n {result}")
+            entered_data = (
+                f"hesab type: {self.hesab_type._variable.get()}"
+                f"hesab number: {self.hesab_number._variable.get()}"
+                f"person id: {self.person_id._variable.get()}"
+                f"bank id: {self.bank_id._variable.get()}"
+            )
+            msg.showinfo("Edit", f"Account saved? \n {entered_data}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
@@ -31,7 +36,14 @@ class AccountView:
     def edit_account(self):
         result = AccountController.edit_account(self.account_id._variable.get(), self.hesab_type._variable.get(), self.hesab_number._variable.get(), self.person_id._variable.get(), self.bank_id._variable.get())
         if result:
-            msg.showinfo("Edit", f"Account edited? \n {result}")
+            entered_data = (
+                f"Id: {self.account_id._variable.get()}"
+                f"hesab type: {self.hesab_type._variable.get()}"
+                f"hesab number: {self.hesab_number._variable.get()}"
+                f"person id: {self.person_id._variable.get()}"
+                f"bank id: {self.bank_id._variable.get()}"
+            )
+            msg.showinfo("Edit", f"AccountId {entered_data} edited? \n")
             self.reset_form()
         elif result.startswith("False"):
             msg.showerror("Error", result)
@@ -39,13 +51,13 @@ class AccountView:
     def remove_account(self):
         get_id = self.remove_row._variable.get()
         AccountController.remove_account(get_id)
-        msg.showinfo("Remove","Account removed?")
+        msg.showinfo("Remove", f"Account {get_id} removed?")
         self.reset_form()
 
     def show(self):
         self.win = Tk()
         self.win.title("account View")
-        self.win.geometry("900x300")
+        self.win.geometry("850x300")
 
         self.account_id = TextWithLabel(self.win, "Id For Edit : ", 20, 20)
 

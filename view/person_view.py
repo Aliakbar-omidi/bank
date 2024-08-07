@@ -3,8 +3,9 @@ from controller import *
 from tkinter import *
 import tkinter.messagebox as msg
 import tkinter.ttk as ttk
+
 from view.component.label_text import TextWithLabel
-from view import *
+from view.account_view import AccountView
 
 
 class PersonView:
@@ -16,37 +17,52 @@ class PersonView:
                 self.table.insert("", END, values=(person.id, person.name, person.family, person.national_id, person.birthdate, person.phone, person.email))
 
     def save_click(self):
-        status, result = PersonController.save_person(self.name.variable.get(), self.family.variable.get(), self.national_id.variable.get(), self.birthdate.variable.get(),self.phone.variable.get(),self.email.variable.get())
+        status, result = PersonController.save_person(self.name._variable.get(), self.family._variable.get(), self.national_id._variable.get(), self.birthdate._variable.get(),self.phone._variable.get(),self.email._variable.get())
         if status:
-            msg.showinfo("save", f"person saved? \n {result}")
+            entered_data = (
+                f"Name: {self.name._variable.get()}\n"
+                f"Family: {self.family._variable.get()}\n"
+                f"National ID: {self.national_id._variable.get()}\n"
+                f"Birthdate: {self.birthdate._variable.get()}\n"
+                f"Phone: {self.phone._variable.get()}\n"
+                f"Email: {self.email._variable.get()}"
+            )
+            msg.showinfo("Save", f"Save Person? \n{entered_data}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
 
     def edit_person(self):
-        result = PersonController.edit_person(self.id.variable.get(), self.name.variable.get(), self.family.variable.get(), self.national_id.variable.get(), self.birthdate.variable.get(), self.phone.variable.get(), self.email.variable.get())
-        print("wqwqw", result)
+        result = PersonController.edit_person(self.id._variable.get(), self.name._variable.get(), self.family._variable.get(), self.national_id._variable.get(), self.birthdate._variable.get(), self.phone._variable.get(), self.email._variable.get())
         if result:
-            msg.showinfo("Edit", f"person edited? \n {result}")
+            entered_data = (
+                f"ID: {self.id._variable.get()}\n"
+                f"Name: {self.name._variable.get()}\n"
+                f"Family: {self.family._variable.get()}\n"
+                f"National ID: {self.national_id._variable.get()}\n"
+                f"Birthdate: {self.birthdate._variable.get()}\n"
+                f"Phone: {self.phone._variable.get()}\n"
+                f"Email: {self.email._variable.get()}"
+            )
+            msg.showinfo("Edit", f"edit person? \n {entered_data}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
 
     def remove_person(self):
-        get_id = self.remove_row.variable.get()
-        print("jkj", get_id)
-        msg.showinfo("Remove", f"Should the check with ID {get_id} be deleted?")
+        get_id = self.remove_row._variable.get()
+        msg.showinfo("Remove", f"PersonID {get_id} delete?")
         PersonController.remove_person(get_id)
         self.reset_form()
 
-    # def show_account(self):
-    #     ui = AccountView()
-    #     ui.show()
+    def show_account(self):
+        ui = AccountView()
+        ui.show()
 
     def show(self):
         self.win = Tk()
         self.win.title("person View")
-        self.win.geometry("1100x400")
+        self.win.geometry("1150x400")
 
         self.id = TextWithLabel(self.win, "ID For ٍEdit: ", 20, 20)
 
@@ -70,7 +86,7 @@ class PersonView:
 
         Button(self.win, text="remove", command=self.remove_person).place(x=660 , y=260)
 
-        # Button(self.win, text= "create account", command=self.show_account).place(x=300 , y=340)
+        Button(self.win, text= "create account", command=self.show_account).place(x=300 , y=340)
 
         self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4, 5, 6, 7), show="headings")
 

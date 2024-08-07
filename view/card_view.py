@@ -15,25 +15,40 @@ class CardView:
                 self.table.insert("", END, values=(card.id, card.number_card, card.cvv2, card.expiration_date, card.password, card.account_id))
 
     def save_click(self):
-        status, result = CardController.save_card(self.number_card.variable.get(), self.cvv2.variable.get(), self.expiration_date.variable.get(), self.password.variable.get(),self.account_id.variable.get())
+        status, result = CardController.save_card(self.number_card._variable.get(), self.cvv2._variable.get(), self.expiration_date._variable.get(), self.password._variable.get(),self.account_id._variable.get())
         if status:
-            msg.showinfo("Save",f"card saved? \n {result}")
+            entered_data = (
+                f"Number card: {self.number_card._variable.get()}\n"
+                f"Cvv2: {self.cvv2._variable.get()}\n"
+                f"Expiration date: {self.expiration_date._variable.get()}\n"
+                f"Password: {self.password._variable.get()}\n"
+                f"Account id: {self.account_id._variable.get()}\n"
+            )
+            msg.showinfo("Save",f"card saved? \n {entered_data}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
 
     def edit_card(self):
-        result = CardController.edit_card(self.id.variable.get(), self.number_card.variable.get(), self.cvv2.variable.get(), self.expiration_date.variable.get(), self.password.variable.get(),self.account_id.variable.get())
+        result = CardController.edit_card(self.id._variable.get(), self.number_card._variable.get(), self.cvv2._variable.get(), self.expiration_date._variable.get(), self.password._variable.get(),self.account_id._variable.get())
         if result:
-            msg.showinfo("Edit", "card edited")
+            entered_data = (
+                f"Id: {self.id._variable.get()}\n"
+                f"Number card: {self.number_card._variable.get()}\n"
+                f"Cvv2: {self.cvv2._variable.get()}\n"
+                f"Expiration date: {self.expiration_date._variable.get()}\n"
+                f"Password: {self.password._variable.get()}\n"
+                f"Account id: {self.account_id._variable.get()}\n"
+            )
+            msg.showinfo("Edit", f"card edited? {entered_data}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
 
     def remove_card(self):
-        get_id = self.row_remove.variable.get()
+        get_id = self.row_remove._variable.get()
         CardController.remove_card(get_id)
-        msg.showinfo("Remove", "card removed")
+        msg.showinfo("Remove", f"CardId {get_id} removed")
         self.reset_form()
 
     def show(self):

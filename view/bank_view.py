@@ -14,29 +14,48 @@ class BankView:
                 self.table.insert("", END, values=(bank.id, bank.name, bank.location, bank.start_time, bank.end_time, bank.branch, bank.number_branch, bank.status))
 
     def save_click(self):
-        status_value = self.status.variable.get()  # مقدار وضعیت انتخاب شده
-        status_bool = True if status_value == "True" else False  # تبدیل به مقدار منطقی
-        status, result = BankController.save_bank(self.name.variable.get(), self.location.variable.get(),self.start_time.variable.get(), self.end_time.variable.get(),self.branch.variable.get(), self.number_branch.variable.get(),status_bool)
+        status_value = self.status._variable.get()
+        self.status_bool = True if status_value == "True" else False
+        status, result = BankController.save_bank(self.name._variable.get(), self.location._variable.get(),self.start_time._variable.get(), self.end_time._variable.get(),self.branch._variable.get(), self.number_branch._variable.get(), self.status_bool)
         if status:
-            msg.showinfo("Save",f"Bank saved? \n {result}")
+            entered_data = (
+                f"Name: {self.name._variable.get()}\n"
+                f"Location: {self.location._variable.get()}\n"
+                f"Start_Time: {self.start_time._variable.get()}\n"
+                f"End_Time: {self.end_time._variable.get()}\n"
+                f"Branch: {self.branch._variable.get()}\n"
+                f"Number_Branch: {self.number_branch._variable.get()}\n"
+                f"status: {self.status_bool}\n"
+            )
+            msg.showinfo("Save", f"Bank saved? \n {entered_data}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
 
     def edit_bank(self):
-        status_value = self.status.variable.get()  # مقدار وضعیت انتخاب شده
-        status_bool = True if status_value == "True" else False  # تبدیل به مقدار منطقی
-        result = BankController.edit_bank(self.id.variable.get(), self.name.variable.get(), self.location.variable.get(), self.start_time.variable.get(), self.end_time.variable.get(), self.branch.variable.get(), self.number_branch.variable.get(), status_bool)
+        status_value = self.status._variable.get()
+        status_bool = True if status_value == "True" else False
+        result = BankController.edit_bank(self.id._variable.get(), self.name._variable.get(), self.location._variable.get(), self.start_time._variable.get(), self.end_time._variable.get(), self.branch._variable.get(), self.number_branch._variable.get(), status_bool)
         if result:
-            msg.showinfo("Edit",f"Bank edited? \n {result}")
+            entered_data = (
+                f"ID: {self.id._variable.get()}\n"
+                f"Name: {self.name._variable.get()}\n"
+                f"Location: {self.location._variable.get()}\n"
+                f"Start Time: {self.start_time._variable.get()}\n"
+                f"End Time: {self.end_time._variable.get()}\n"
+                f"Branch: {self.branch._variable.get()}\n"
+                f"Number Branch: {self.number_branch._variable.get()}\n"
+                f"status: {status_bool}\n"
+            )
+            msg.showinfo("Edit", f"Bank edited? \n {entered_data}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
 
     def remove_bank(self):
-        get_id = self.remove_row.variable.get()
+        get_id = self.remove_row._variable.get()
         BankController.remove_bank(get_id)
-        msg.showinfo("Bank deleted!", f"Are you sure to delete {get_id}?")
+        msg.showinfo("Bank deleted!", f"BankId {get_id} delete?")
         self.reset_form()
 
     def show(self):

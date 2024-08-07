@@ -1,9 +1,5 @@
-from view import *
-# print("App started")
-# ui = PersonView()
-# ui.show()
-# print("App ended")
 
+from view import *
 from tkinter import *
 import tkinter.messagebox as msg
 import tkinter.ttk as ttk
@@ -14,7 +10,7 @@ class FrontView:
 
     def show_view_person(self):
         msg.showinfo("question", "برای ایجاد حساب بانکی ابتدا مشخصات خود را وارد کنید ")
-        ui = AccountView()
+        ui = PersonView()
         ui.show()
 
     def show_view_bank(self):
@@ -39,5 +35,5 @@ class FrontView:
         self.win.mainloop()
 
 
-ui = FrontView()
+ui = CardView()
 ui.show()
