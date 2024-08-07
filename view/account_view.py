@@ -2,22 +2,32 @@ from controller import *
 from tkinter import *
 import tkinter.messagebox as msg
 import tkinter.ttk as ttk
+
+from model.da.da import DataAccess
+from model.entity import *
 from view.component.label_text import TextWithLabel
 
 
 class AccountView:
+    def __init__(self):
+        self.Account = DataAccess(Account)
+
     def reset_form(self):
-        self.table.delete(*self.table.get_children())          # پاک کردن تمام ردیف ‌های جدول
-        status, account_list = AccountController.find_all()    # بازیابی مقادیر جدید و اضافه کردن به جدول
+        self.table.delete(*self.table.get_children())
+        status, account_list = AccountController.find_all()
         if status:
             for account in account_list:
                 self.table.insert("", END,
                                   values=(account.id,account.hesab_type, account.hesab_number, account.person_id, account.bank_id))
 
     def save_click(self):
-        status, result = AccountController.save_account(self.hesab_type.variable.get(), self.hesab_number.variable.get(), self.person_id.variable.get(), self.bank_id.variable.get())
+        hesab_type = self.hesab_type.variable.get()
+        hesab_number = self.hesab_number.variable.get()
+        person_id = self.person_id.variable.get()
+        bank_id = self.bank_id.variable.get()
+        status, result = AccountController.save_account(hesab_type, hesab_number, person_id, bank_id)
         if status:
-            msg.showinfo("Edit",f"Account saved? \n {result}")
+            msg.showinfo("Edit", f"Account saved? \n {result}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
@@ -41,7 +51,7 @@ class AccountView:
         self.win.title("account View")
         self.win.geometry("900x300")
 
-        self.account_id = TextWithLabel(self.win, "account id: ", 20, 20)
+        self.account_id = TextWithLabel(self.win, "Id For Edit : ", 20, 20)
 
         self.hesab_type = TextWithLabel(self.win, "hesab type: ", 20, 60)
 
@@ -59,7 +69,7 @@ class AccountView:
 
         Button(self.win, text="Remove", command=self.remove_account).place(x=620, y=240)
 
-        self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4,5), show="headings")
+        self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4, 5), show="headings")
 
         self.table.column(1, width=70)
         self.table.column(2, width=100)

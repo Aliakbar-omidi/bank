@@ -14,7 +14,7 @@ class FrontView:
 
     def show_view_person(self):
         msg.showinfo("question", "برای ایجاد حساب بانکی ابتدا مشخصات خود را وارد کنید ")
-        ui = PersonView()
+        ui = AccountView()
         ui.show()
 
     def show_view_bank(self):
@@ -26,7 +26,7 @@ class FrontView:
         self.win.title("View")
         self.win.geometry("200x200")
 
-        Button(self.win, text="ایجاد حساب کاربری", command=self.show_view_person).place(x=20, y=20)
+        Button(self.win, text="ایجاد  حساب کاربری", command=self.show_view_person).place(x=20, y=20)
 
         Button(self.win, text="بانک", command=self.show_view_bank).place(x=20, y=60)
 
@@ -39,5 +39,5 @@ class FrontView:
         self.win.mainloop()
 
 
-ui = PersonView()
+ui = AccountView()
 ui.show()
