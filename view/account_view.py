@@ -52,9 +52,13 @@ class AccountView:
 
     def remove_account(self):
         get_id = self.remove_row._variable.get()
-        AccountController.remove_account(get_id)
-        msg.showinfo("Remove", f"Account {get_id} removed?")
-        self.reset_form()
+        find_id = AccountController.find_by_id(get_id)
+        if find_id:
+            msg.showinfo("Remove", f"AccountId {get_id} delete?")
+            AccountController.remove_account(get_id)
+            self.reset_form()
+        else:
+            msg.showerror("Error", f"ID {get_id} not found")
 
     def show_check(self):
         ui = CheckView()
@@ -64,10 +68,28 @@ class AccountView:
         ui = TransactionView()
         ui.show()
 
+    def find_person_by_id(self):
+        get_id = self.find_person._variable.get()
+        find_id = PersonController.find_by_id(get_id)
+        if find_id:
+            msg.showinfo("Find", f"PersonId {get_id} found")
+        else:
+            msg.showerror("Error", f"PersonId {get_id} not found")
+
+    def find_bank_by_id(self):
+        get_id = self.find_bank._variable.get()
+        find_id = BankController.find_by_id(get_id)
+        if find_id:
+            msg.showinfo("Find", f"BankId {get_id} found")
+        else:
+            msg.showerror("Error", f"BankId {get_id} not found")
+
+
+
     def show(self):
         self.win = Tk()
         self.win.title("account View")
-        self.win.geometry("850x300")
+        self.win.geometry("915x370")
 
         self.account_id = TextWithLabel(self.win, "Id For Edit : ", 20, 20)
 
@@ -79,17 +101,25 @@ class AccountView:
 
         self.bank_id = TextWithLabel(self.win, "bank id: ", 20, 180)
 
-        self.remove_row = TextWithLabel(self.win, "id for remove: ", 420, 242)
+        self.find_bank = TextWithLabel(self.win, "Find Bank By Id: ", 350, 240, distance=150)
+
+        self.find_person = TextWithLabel(self.win, "Find Person By Id: ", 350, 280, distance=150)
+
+        self.remove_row = TextWithLabel(self.win, "Remove Account By Id: ", 350, 320, distance=150)
 
         Button(self.win, text="save", command=self.save_click).place(x=20, y=240)
 
         Button(self.win, text="Edit", command=self.edit_account).place(x=100, y=240)
 
-        Button(self.win, text="check", command=self.show_check).place(x=200, y=240)
+        Button(self.win, text="check", command=self.show_check).place(x=20, y=280)
 
-        Button(self.win, text="transaction", command=self.show_transaction).place(x=280, y=240)
+        Button(self.win, text="transaction", command=self.show_transaction).place(x=100, y=280)
 
-        Button(self.win, text="Remove", command=self.remove_account).place(x=720, y=240)
+        Button(self.win, text="Search", command=self.find_bank_by_id).place(x=700, y=240)
+
+        Button(self.win, text="Search", command=self.find_person_by_id).place(x=700, y=280)
+
+        Button(self.win, text="Remove", command=self.remove_account).place(x=700, y=320)
 
         self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4, 5), show="headings")
 
@@ -105,7 +135,7 @@ class AccountView:
         self.table.heading(4, text="person id")
         self.table.heading(5, text="bank id")
 
-        self.table.place(x=320, y=20)
+        self.table.place(x=350, y=20)
 
         self.reset_form()
 

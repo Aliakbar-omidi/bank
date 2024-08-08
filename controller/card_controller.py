@@ -48,3 +48,7 @@ class CardController:
         except Exception as e:
             Logger.error(f"{e}")
             return False, f"{e}"
+
+    @staticmethod
+    def find_by_id(id):
+        return CardService.find_by_id(id)

@@ -47,13 +47,21 @@ class CheckView:
 
     def remove_check(self):
         get_id = self.remove_row._variable.get()
-        CheckController.remove_check(get_id)
-        msg.showinfo("Remove", f"checkId {get_id} delete?")
-        self.reset_form()
+        find_id = CardController.find_by_id(get_id)
+        if find_id:
+            msg.showinfo("Remove", f"AccountId {get_id} delete?")
+            CardController.remove_card(get_id)
+            self.reset_form()
+        else:
+            msg.showerror("Error", f"ID {get_id} not found")
 
     def find_account_by_id(self):
         get_id = self.find_account._variable.get()
-        AccountController.find_by_id(get_id)
+        find_id = AccountController.find_by_id(get_id)
+        if find_id:
+            msg.showinfo("Find", f"AccountId {get_id} found")
+        else:
+            msg.showerror("Error", f"AccountId {get_id} not found")
 
     def show(self):
         self.win = Tk()
@@ -76,11 +84,11 @@ class CheckView:
 
         self.remove_row = TextWithLabel(self.win, "Remove Check By Id: ", 350, 275, distance=130)
 
-        Button(self.win, text= "save", command=self.save_click).place(x=20 , y=275)
+        Button(self.win, text= "Save", command=self.save_click).place(x=20 , y=275)
 
         Button(self.win, text= "Edit", command=self.edit_check).place(x=100 , y=275)
 
-        Button(self.win, text= "search", command = self.find_account_by_id).place(x=670 , y=235)
+        Button(self.win, text= "Search", command = self.find_account_by_id).place(x=670 , y=235)
 
         Button(self.win, text= "Remove", command = self.remove_check).place(x=670 , y=275)
 

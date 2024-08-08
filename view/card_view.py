@@ -47,9 +47,21 @@ class CardView:
 
     def remove_card(self):
         get_id = self.row_remove._variable.get()
-        CardController.remove_card(get_id)
-        msg.showinfo("Remove", f"CardId {get_id} removed")
-        self.reset_form()
+        find_id = CardController.find_by_id(get_id)
+        if find_id:
+            msg.showinfo("Remove", f"CardId {get_id} delete?")
+            CardController.remove_card(get_id)
+            self.reset_form()
+        else:
+            msg.showerror("Error", f"cardId {get_id} not found")
+
+    def find_account_by_id(self):
+        get_id = self.find_account._variable.get()
+        find_id = AccountController.find_by_id(get_id)
+        if find_id:
+            msg.showinfo("Find", f"AccountId {get_id} found")
+        else:
+            msg.showerror("Error", f"AccountId {get_id} not found")
 
     def show(self):
         self.win = Tk()
@@ -68,13 +80,17 @@ class CardView:
 
         self.account_id = TextWithLabel(self.win, "account id: ", 20, 220)
 
-        self.row_remove = TextWithLabel(self.win, "ID For Remove: ", 330, 260)
+        self.row_remove = TextWithLabel(self.win, "Remove Card By Id: ", 330, 240, distance=125)
 
-        Button(self.win, text= "save", command=self.save_click).place(x=20 , y=280)
+        self.find_account = TextWithLabel(self.win, "Find Account By Id: ", 330, 280, distance=125)
 
-        Button(self.win, text= "edit", command=self.edit_card).place(x=100 , y=280)
+        Button(self.win, text="save", command=self.save_click).place(x=20 , y=280)
 
-        Button(self.win, text= "remove", command=self.remove_card).place(x=630 , y=260)
+        Button(self.win, text="edit", command=self.edit_card).place(x=100 , y=280)
+
+        Button(self.win, text="remove", command=self.remove_card).place(x=650 , y=240)
+
+        Button(self.win, text="Search", command=self.find_account_by_id).place(x=650 , y=280)
 
         self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4, 5, 6), show="headings")
 

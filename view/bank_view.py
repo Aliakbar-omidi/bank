@@ -54,14 +54,18 @@ class BankView:
 
     def remove_bank(self):
         get_id = self.remove_row._variable.get()
-        BankController.remove_bank(get_id)
-        msg.showinfo("Bank deleted!", f"BankId {get_id} delete?")
-        self.reset_form()
+        find_id = BankController.find_by_id(get_id)
+        if find_id:
+            msg.showinfo("Remove", f"BankId {get_id} delete?")
+            BankController.remove_bank(get_id)
+            self.reset_form()
+        else:
+            msg.showerror("Error", f"ID {get_id} not found")
 
     def show(self):
         self.win = Tk()
         self.win.title("Bank View")
-        self.win.geometry("1100x450")
+        self.win.geometry("1100x400")
 
         self.id = TextWithLabel(self.win, "ID For Edit: ", 20, 20)
 
@@ -81,9 +85,9 @@ class BankView:
 
         self.remove_row = TextWithLabel(self.win, "ID For Remove: ", 330, 260)
 
-        Button(self.win, text= "save", command=self.save_click).place(x=20 , y=380)
+        Button(self.win, text= "save", command=self.save_click).place(x=20 , y=350)
 
-        Button(self.win, text= "edit", command=self.edit_bank).place(x=100 , y=380)
+        Button(self.win, text= "edit", command=self.edit_bank).place(x=100 , y=350)
 
         Button(self.win, text= "remove", command=self.remove_bank).place(x=630 , y=260)
 

@@ -19,9 +19,6 @@ def positive_int_validator(int_value, message):
 
 def boolean_validator(bool_value, message):
     if isinstance(bool_value, bool):
-        # match bool_value:
-        #     case "True": return True
-        #     case "False": return False
         return bool_value
     else:
         raise ValueError(message)
