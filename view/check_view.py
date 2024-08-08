@@ -15,25 +15,40 @@ class CheckView:
                 self.table.insert("", END, values=(check.id, check.check_serial, check.price, check.date_now, check.date_end, check.account_id))
 
     def save_click(self):
-        status, result = CheckController.save_check(self.check_serial.variable.get(), self.price.variable.get(), self.date_now.variable.get(),self.date_end.variable.get(),self.account_id.variable.get())
+        status, result = CheckController.save_check(self.check_serial._variable.get(), self.price._variable.get(), self.date_now._variable.get(),self.date_end._variable.get(),self.account_id._variable.get())
         if status:
-            msg.showinfo("Save", f"check saved? \n {result}")
+            entered_data = (
+                f"Check Serial: {self.check_serial._variable.get()}\n"
+                f"Price: {self.price._variable.get()}\n"
+                f"Date Now: {self.date_now._variable.get()}\n"
+                f"Date End: {self.date_end._variable.get()}\n"
+                f"Account id: {self.account_id._variable.get()}"
+            )
+            msg.showinfo("Save", f"check saved? \n {entered_data}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
 
     def edit_check(self):
-        result = CheckController.edit_check(self.id.variable.get(), self.check_serial.variable.get(), self.price.variable.get(), self.date_now.variable.get(),self.date_end.variable.get(), self.account_id.variable.get())
+        result = CheckController.edit_check(self.id._variable.get(), self.check_serial._variable.get(), self.price._variable.get(), self.date_now._variable.get(),self.date_end._variable.get(), self.account_id._variable.get())
         if result:
-            msg.showinfo("Edit", f"check edited? \n {result}")
+            entered_data = (
+                f"ID: {self.id._variable.get()}\n"
+                f"Check Serial: {self.check_serial._variable.get()}\n"
+                f"Price: {self.price._variable.get()}\n"
+                f"Date Now: {self.date_now._variable.get()}\n"
+                f"Date End: {self.date_end._variable.get()}\n"
+                f"Account id: {self.account_id._variable.get()}"
+            )
+            msg.showinfo("Edit", f"check edited? \n {entered_data}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
 
     def remove_check(self):
-        get_id = self.remove_row.variable.get()
+        get_id = self.remove_row._variable.get()
         CheckController.remove_check(get_id)
-        msg.showinfo("Remove", f"check removed?")
+        msg.showinfo("Remove", f"checkId {get_id} delete?")
         self.reset_form()
 
     def show(self):

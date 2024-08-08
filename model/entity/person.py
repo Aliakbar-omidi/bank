@@ -77,4 +77,4 @@ class Person(Base):
 
     @email.setter
     def email(self, email):
-        self._email = email
+        self._email = email_validator(email,"Invalid email")

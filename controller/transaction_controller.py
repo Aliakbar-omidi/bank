@@ -5,9 +5,9 @@ from model.tools.logger import Logger
 
 class TransactionController:
     @staticmethod
-    def save_transaction(serial, description, date_time, payment_gateway, price, status,account_id):
+    def save_transaction(serial, description, date_transaction, time_transaction, payment_gateway, price, status,account_id):
         try:
-            transaction = Transaction(serial, description, date_time, payment_gateway, price, status)
+            transaction = Transaction(serial, description, date_transaction, time_transaction, payment_gateway, price, status)
             transaction.account_id = account_id
             TransactionService.save(transaction)
             Logger.info(f"transaction saved {transaction}")
@@ -17,14 +17,14 @@ class TransactionController:
             return False, f"{e}"
 
     @staticmethod
-    def edit_transaction(id, serial, description, date_time, payment_gateway, price, status, account_id):
+    def edit_transaction(id, serial, description, date_transaction, time_transaction, payment_gateway, price, status, account_id):
         try:
-            transaction = Transaction(serial, description, date_time, payment_gateway, price, status)
+            transaction = Transaction(serial, description, date_transaction, time_transaction, payment_gateway, price, status)
             transaction.id = id
             transaction.account_id = account_id
             TransactionService.edit(transaction)
             Logger.info(f"transaction edited {transaction}")
-            return True,transaction
+            return True, transaction
         except Exception as e:
             Logger.error(f"{e}")
             return False, f"{e}"

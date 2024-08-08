@@ -7,7 +7,8 @@ class Transaction(Base):
     _id = Column("id",Integer, primary_key=True, autoincrement=True)
     _serial = Column("serial", Integer, nullable=False)
     _description = Column("description", String(30), nullable=False)
-    _date_time = Column("date_time",DateTime, nullable=False)
+    _date_transaction = Column("date_transaction", Date, nullable=False)
+    _time_transaction = Column("time_transaction", Time, nullable=False)
     _payment_gateway = Column("payment_gateway", String(30), nullable=False)
     _price = Column("price", Integer, default=0)
     _status = Column("status", Boolean)
@@ -15,11 +16,12 @@ class Transaction(Base):
     _account_id = Column("account_id", Integer, ForeignKey("account_tbl.id"))
     account = relationship("Account")
 
-    def __init__(self, serial, description, date_time, payment_gateway, price, status):
+    def __init__(self, serial, description, date_transaction, time_transaction, payment_gateway, price, status):
         self.id = None
         self.serial = serial
         self.description = description
-        self.date_time = date_time
+        self.date_transaction = date_transaction
+        self.time_transaction = time_transaction
         self.payment_gateway = payment_gateway
         self.price = price
         self.status = status
@@ -49,12 +51,20 @@ class Transaction(Base):
         self._description = description
 
     @property
-    def date_time(self):
-        return self._date_time
+    def date_transaction(self):
+        return self._date_transaction
 
-    @date_time.setter
-    def date_time(self, date_time):
-        self._date_time = date_time
+    @date_transaction.setter
+    def date_transaction(self, date_transaction):
+        self._date_transaction = date_transaction
+
+    @property
+    def time_transaction(self):
+        return self._time_transaction
+
+    @time_transaction.setter
+    def time_transaction(self, time_transaction):
+        self._time_transaction = time_transaction
 
     @property
     def payment_gateway(self):

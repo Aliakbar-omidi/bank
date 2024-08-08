@@ -28,6 +28,7 @@ class PersonView:
                 f"Email: {self.email._variable.get()}"
             )
             msg.showinfo("Save", f"Save Person? \n{entered_data}")
+            msg.showinfo("question", "مشخصات شما سیو شد. برای ساخت حساب کار بری روی دکمه ی create account کلیک کنید.")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)

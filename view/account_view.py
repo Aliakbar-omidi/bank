@@ -6,6 +6,8 @@ import tkinter.ttk as ttk
 
 from model.da.da import DataAccess
 from model.entity import *
+from view.check_view import CheckView
+from view.transaction_view import TransactionView
 from view.component.label_text import TextWithLabel
 
 
@@ -23,10 +25,10 @@ class AccountView:
         status, result = AccountController.save_account(self.hesab_type._variable.get(), self.hesab_number._variable.get(), self.person_id._variable.get(), self.bank_id._variable.get())
         if status:
             entered_data = (
-                f"hesab type: {self.hesab_type._variable.get()}"
-                f"hesab number: {self.hesab_number._variable.get()}"
-                f"person id: {self.person_id._variable.get()}"
-                f"bank id: {self.bank_id._variable.get()}"
+                f"hesab type: {self.hesab_type._variable.get()}\n"
+                f"hesab number: {self.hesab_number._variable.get()}\n"
+                f"person id: {self.person_id._variable.get()}\n"
+                f"bank id: {self.bank_id._variable.get()}\n"
             )
             msg.showinfo("Edit", f"Account saved? \n {entered_data}")
             self.reset_form()
@@ -37,11 +39,11 @@ class AccountView:
         result = AccountController.edit_account(self.account_id._variable.get(), self.hesab_type._variable.get(), self.hesab_number._variable.get(), self.person_id._variable.get(), self.bank_id._variable.get())
         if result:
             entered_data = (
-                f"Id: {self.account_id._variable.get()}"
-                f"hesab type: {self.hesab_type._variable.get()}"
-                f"hesab number: {self.hesab_number._variable.get()}"
-                f"person id: {self.person_id._variable.get()}"
-                f"bank id: {self.bank_id._variable.get()}"
+                f"Id: {self.account_id._variable.get()}\n"
+                f"hesab type: {self.hesab_type._variable.get()}\n"
+                f"hesab number: {self.hesab_number._variable.get()}\n"
+                f"person id: {self.person_id._variable.get()}\n"
+                f"bank id: {self.bank_id._variable.get()}\n"
             )
             msg.showinfo("Edit", f"AccountId {entered_data} edited? \n")
             self.reset_form()
@@ -53,6 +55,14 @@ class AccountView:
         AccountController.remove_account(get_id)
         msg.showinfo("Remove", f"Account {get_id} removed?")
         self.reset_form()
+
+    def show_check(self):
+        ui = CheckView()
+        ui.show()
+
+    def show_transaction(self):
+        ui = TransactionView()
+        ui.show()
 
     def show(self):
         self.win = Tk()
@@ -69,13 +79,17 @@ class AccountView:
 
         self.bank_id = TextWithLabel(self.win, "bank id: ", 20, 180)
 
-        self.remove_row = TextWithLabel(self.win, "id for remove: ", 320, 240)
+        self.remove_row = TextWithLabel(self.win, "id for remove: ", 420, 242)
 
         Button(self.win, text="save", command=self.save_click).place(x=20, y=240)
 
         Button(self.win, text="Edit", command=self.edit_account).place(x=100, y=240)
 
-        Button(self.win, text="Remove", command=self.remove_account).place(x=620, y=240)
+        Button(self.win, text="check", command=self.show_check).place(x=200, y=240)
+
+        Button(self.win, text="transaction", command=self.show_transaction).place(x=280, y=240)
+
+        Button(self.win, text="Remove", command=self.remove_account).place(x=720, y=240)
 
         self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4, 5), show="headings")
 

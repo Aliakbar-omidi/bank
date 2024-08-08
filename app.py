@@ -22,7 +22,7 @@ class FrontView:
         self.win.title("View")
         self.win.geometry("200x200")
 
-        Button(self.win, text="ایجاد  حساب کاربری", command=self.show_view_person).place(x=20, y=20)
+        Button(self.win, text="ایجاد  حساب ", command=self.show_view_person).place(x=20, y=20)
 
         Button(self.win, text="بانک", command=self.show_view_bank).place(x=20, y=60)
 
@@ -35,5 +35,5 @@ class FrontView:
         self.win.mainloop()
 
 
-ui = CardView()
+ui = AccountView()
 ui.show()

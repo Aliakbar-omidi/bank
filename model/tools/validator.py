@@ -1,5 +1,6 @@
 import re
-from datetime import datetime,time, date
+from datetime import datetime, time, date
+import tkinter.messagebox as msg
 
 
 def name_validator(name, message):
@@ -50,4 +51,4 @@ def email_validator(email_value, message):
     if isinstance(email_value, str) and re.match(r"^[a-zA-Z\s]+@(gmail|yahoo)\.com$", email_value):
         return email_value
     else:
-        raise ValueError(message)
+        raise msg.showinfo("Email Validator Error", "Please enter a valid email address.")
