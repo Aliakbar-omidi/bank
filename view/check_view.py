@@ -1,4 +1,3 @@
-
 from controller import *
 from tkinter import *
 import tkinter.messagebox as msg
@@ -12,10 +11,13 @@ class CheckView:
         status, check_list = CheckController.find_all()
         if status:
             for check in check_list:
-                self.table.insert("", END, values=(check.id, check.check_serial, check.price, check.date_now, check.date_end, check.account_id))
+                self.table.insert("", END, values=(
+                    check.id, check.check_serial, check.price, check.date_now, check.date_end, check.account_id))
 
     def save_click(self):
-        status, result = CheckController.save_check(self.check_serial._variable.get(), self.price._variable.get(), self.date_now._variable.get(),self.date_end._variable.get(),self.account_id._variable.get())
+        status, result = CheckController.save_check(self.check_serial._variable.get(), self.price._variable.get(),
+                                                    self.date_now._variable.get(), self.date_end._variable.get(),
+                                                    self.account_id._variable.get())
         if status:
             entered_data = (
                 f"Check Serial: {self.check_serial._variable.get()}\n"
@@ -30,7 +32,9 @@ class CheckView:
             msg.showerror("Error", result)
 
     def edit_check(self):
-        result = CheckController.edit_check(self.id._variable.get(), self.check_serial._variable.get(), self.price._variable.get(), self.date_now._variable.get(),self.date_end._variable.get(), self.account_id._variable.get())
+        result = CheckController.edit_check(self.id._variable.get(), self.check_serial._variable.get(),
+                                            self.price._variable.get(), self.date_now._variable.get(),
+                                            self.date_end._variable.get(), self.account_id._variable.get())
         if result:
             entered_data = (
                 f"ID: {self.id._variable.get()}\n"
@@ -80,17 +84,17 @@ class CheckView:
 
         self.account_id = TextWithLabel(self.win, "Account id: ", 20, 220)
 
-        self.find_account = TextWithLabel(self.win, "Find Account By Id: ", 350, 235, distance=130)
+        self.find_account = TextWithLabel(self.win, "Find Account By Id: ", 350, 235, distance=133)
 
-        self.remove_row = TextWithLabel(self.win, "Remove Check By Id: ", 350, 275, distance=130)
+        self.remove_row = TextWithLabel(self.win, "Remove Check By Id: ", 350, 275, distance=133)
 
-        Button(self.win, text= "Save", command=self.save_click).place(x=20 , y=275)
+        Button(self.win, text="Save", command=self.save_click).place(x=20, y=275)
 
-        Button(self.win, text= "Edit", command=self.edit_check).place(x=100 , y=275)
+        Button(self.win, text="Edit", command=self.edit_check).place(x=100, y=275)
 
-        Button(self.win, text= "Search", command = self.find_account_by_id).place(x=670 , y=235)
+        Button(self.win, text="Search", command=self.find_account_by_id).place(x=675, y=235)
 
-        Button(self.win, text= "Remove", command = self.remove_check).place(x=670 , y=275)
+        Button(self.win, text="Remove", command=self.remove_check).place(x=675, y=275)
 
         self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4, 5, 6), show="headings")
 
@@ -108,7 +112,7 @@ class CheckView:
         self.table.heading(5, text="date end")
         self.table.heading(6, text="account id")
 
-        self.table.place(x=320,y=20)
+        self.table.place(x=320, y=20)
 
         self.reset_form()
 

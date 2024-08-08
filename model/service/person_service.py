@@ -36,8 +36,3 @@ class PersonService:
     def find_by_id(id):
         person_da = DataAccess(Person)
         return person_da.find_by_id(id)
-
-    @staticmethod
-    def find_by_title(title):
-        person_da = DataAccess(Person)
-        return person_da.find_by(Person._title == title)

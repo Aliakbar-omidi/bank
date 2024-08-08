@@ -48,3 +48,7 @@ class TransactionController:
         except Exception as e:
             Logger.error(f"{e}")
             return False, f"{e}"
+
+    @staticmethod
+    def find_by_id(id):
+        return TransactionService.find_by_id(id)

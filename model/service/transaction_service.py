@@ -36,8 +36,3 @@ class TransactionService:
     def find_by_id(id):
         transaction_da = DataAccess(Transaction)
         return transaction_da.find_by_id(id)
-
-    @staticmethod
-    def find_by_title(title):
-        transaction_da = DataAccess(Transaction)
-        return transaction_da.find_by(Transaction._title == title)

@@ -11,12 +11,17 @@ class BankView:
         status, bank_list = BankController.find_all()
         if status:
             for bank in bank_list:
-                self.table.insert("", END, values=(bank.id, bank.name, bank.location, bank.start_time, bank.end_time, bank.branch, bank.number_branch, bank.status))
+                self.table.insert("", END, values=(
+                    bank.id, bank.name, bank.location, bank.start_time, bank.end_time, bank.branch, bank.number_branch,
+                    bank.status))
 
     def save_click(self):
         status_value = self.status._variable.get()
         status_bool = True if str(status_value) == "True" else False
-        status, result = BankController.save_bank(self.name._variable.get(), self.location._variable.get(),self.start_time._variable.get(), self.end_time._variable.get(),self.branch._variable.get(), self.number_branch._variable.get(), status_bool)
+        status, result = BankController.save_bank(self.name._variable.get(), self.location._variable.get(),
+                                                  self.start_time._variable.get(), self.end_time._variable.get(),
+                                                  self.branch._variable.get(), self.number_branch._variable.get(),
+                                                  status_bool)
         if status:
             entered_data = (
                 f"Name: {self.name._variable.get()}\n"
@@ -35,7 +40,10 @@ class BankView:
     def edit_bank(self):
         status_value = self.status._variable.get()
         status_bool = True if status_value == "True" else False
-        result = BankController.edit_bank(self.id._variable.get(), self.name._variable.get(), self.location._variable.get(), self.start_time._variable.get(), self.end_time._variable.get(), self.branch._variable.get(), self.number_branch._variable.get(), status_bool)
+        result = BankController.edit_bank(self.id._variable.get(), self.name._variable.get(),
+                                          self.location._variable.get(), self.start_time._variable.get(),
+                                          self.end_time._variable.get(), self.branch._variable.get(),
+                                          self.number_branch._variable.get(), status_bool)
         if result:
             entered_data = (
                 f"ID: {self.id._variable.get()}\n"
@@ -83,13 +91,13 @@ class BankView:
 
         self.status = TextWithLabel(self.win, "Status: ", 20, 300)
 
-        self.remove_row = TextWithLabel(self.win, "ID For Remove: ", 330, 260)
+        self.remove_row = TextWithLabel(self.win, "Remove Bank By Id: ", 330, 260, distance=125)
 
-        Button(self.win, text= "save", command=self.save_click).place(x=20 , y=350)
+        Button(self.win, text="save", command=self.save_click).place(x=20, y=350)
 
-        Button(self.win, text= "edit", command=self.edit_bank).place(x=100 , y=350)
+        Button(self.win, text="edit", command=self.edit_bank).place(x=100, y=350)
 
-        Button(self.win, text= "remove", command=self.remove_bank).place(x=630 , y=260)
+        Button(self.win, text="remove", command=self.remove_bank).place(x=655, y=260)
 
         self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4, 5, 6, 7, 8), show="headings")
 
@@ -111,7 +119,7 @@ class BankView:
         self.table.heading(7, text="Number Branch")
         self.table.heading(8, text="Status")
 
-        self.table.place(x=320,y=20)
+        self.table.place(x=320, y=20)
 
         self.reset_form()
 

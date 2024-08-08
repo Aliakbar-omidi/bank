@@ -35,5 +35,5 @@ class FrontView:
         self.win.mainloop()
 
 
-ui = CardView()
+ui = BankView()
 ui.show()

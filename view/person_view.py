@@ -1,4 +1,3 @@
-
 from controller import *
 from tkinter import *
 import tkinter.messagebox as msg
@@ -14,10 +13,14 @@ class PersonView:
         status, person_list = PersonController.find_all()
         if status:
             for person in person_list:
-                self.table.insert("", END, values=(person.id, person.name, person.family, person.national_id, person.birthdate, person.phone, person.email))
+                self.table.insert("", END, values=(
+                    person.id, person.name, person.family, person.national_id, person.birthdate, person.phone,
+                    person.email))
 
     def save_click(self):
-        status, result = PersonController.save_person(self.name._variable.get(), self.family._variable.get(), self.national_id._variable.get(), self.birthdate._variable.get(),self.phone._variable.get(),self.email._variable.get())
+        status, result = PersonController.save_person(self.name._variable.get(), self.family._variable.get(),
+                                                      self.national_id._variable.get(), self.birthdate._variable.get(),
+                                                      self.phone._variable.get(), self.email._variable.get())
         if status:
             entered_data = (
                 f"Name: {self.name._variable.get()}\n"
@@ -34,7 +37,10 @@ class PersonView:
             msg.showerror("Error", result)
 
     def edit_person(self):
-        result = PersonController.edit_person(self.id._variable.get(), self.name._variable.get(), self.family._variable.get(), self.national_id._variable.get(), self.birthdate._variable.get(), self.phone._variable.get(), self.email._variable.get())
+        result = PersonController.edit_person(self.id._variable.get(), self.name._variable.get(),
+                                              self.family._variable.get(), self.national_id._variable.get(),
+                                              self.birthdate._variable.get(), self.phone._variable.get(),
+                                              self.email._variable.get())
         if result:
             entered_data = (
                 f"ID: {self.id._variable.get()}\n"
@@ -52,9 +58,13 @@ class PersonView:
 
     def remove_person(self):
         get_id = self.remove_row._variable.get()
-        msg.showinfo("Remove", f"PersonID {get_id} delete?")
-        PersonController.remove_person(get_id)
-        self.reset_form()
+        find_id = PersonController.find_by_id(get_id)
+        if find_id:
+            msg.showinfo("Remove", f"PersonId {get_id} delete?")
+            PersonController.remove_person(get_id)
+            self.reset_form()
+        else:
+            msg.showerror("Error", f"ID {get_id} not found")
 
     def show_account(self):
         ui = AccountView()
@@ -79,15 +89,15 @@ class PersonView:
 
         self.email = TextWithLabel(self.win, "email: ", 20, 260)
 
-        self.remove_row = TextWithLabel(self.win, "ID For Remove:",360, 260)
+        self.remove_row = TextWithLabel(self.win, "ID For Remove:", 360, 260)
 
-        Button(self.win, text="save", command=self.save_click).place(x=20 , y=340)
+        Button(self.win, text="save", command=self.save_click).place(x=20, y=340)
 
-        Button(self.win, text="edit", command=self.edit_person).place(x=100 , y=340)
+        Button(self.win, text="edit", command=self.edit_person).place(x=100, y=340)
 
-        Button(self.win, text="remove", command=self.remove_person).place(x=660 , y=260)
+        Button(self.win, text="remove", command=self.remove_person).place(x=660, y=260)
 
-        Button(self.win, text= "create account", command=self.show_account).place(x=300 , y=340)
+        Button(self.win, text="create account", command=self.show_account).place(x=300, y=340)
 
         self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4, 5, 6, 7), show="headings")
 
@@ -107,7 +117,7 @@ class PersonView:
         self.table.heading(6, text="phone")
         self.table.heading(7, text="email")
 
-        self.table.place(x=320,y=20)
+        self.table.place(x=320, y=20)
 
         self.reset_form()
 

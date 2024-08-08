@@ -1,4 +1,3 @@
-
 from controller import *
 from tkinter import *
 import tkinter.messagebox as msg
@@ -12,10 +11,13 @@ class CardView:
         status, card_list = CardController.find_all()
         if status:
             for card in card_list:
-                self.table.insert("", END, values=(card.id, card.number_card, card.cvv2, card.expiration_date, card.password, card.account_id))
+                self.table.insert("", END, values=(
+                    card.id, card.number_card, card.cvv2, card.expiration_date, card.password, card.account_id))
 
     def save_click(self):
-        status, result = CardController.save_card(self.number_card._variable.get(), self.cvv2._variable.get(), self.expiration_date._variable.get(), self.password._variable.get(),self.account_id._variable.get())
+        status, result = CardController.save_card(self.number_card._variable.get(), self.cvv2._variable.get(),
+                                                  self.expiration_date._variable.get(), self.password._variable.get(),
+                                                  self.account_id._variable.get())
         if status:
             entered_data = (
                 f"Number card: {self.number_card._variable.get()}\n"
@@ -24,13 +26,15 @@ class CardView:
                 f"Password: {self.password._variable.get()}\n"
                 f"Account id: {self.account_id._variable.get()}\n"
             )
-            msg.showinfo("Save",f"card saved? \n {entered_data}")
+            msg.showinfo("Save", f"card saved? \n {entered_data}")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
 
     def edit_card(self):
-        result = CardController.edit_card(self.id._variable.get(), self.number_card._variable.get(), self.cvv2._variable.get(), self.expiration_date._variable.get(), self.password._variable.get(),self.account_id._variable.get())
+        result = CardController.edit_card(self.id._variable.get(), self.number_card._variable.get(),
+                                          self.cvv2._variable.get(), self.expiration_date._variable.get(),
+                                          self.password._variable.get(), self.account_id._variable.get())
         if result:
             entered_data = (
                 f"Id: {self.id._variable.get()}\n"
@@ -80,17 +84,17 @@ class CardView:
 
         self.account_id = TextWithLabel(self.win, "account id: ", 20, 220)
 
-        self.row_remove = TextWithLabel(self.win, "Remove Card By Id: ", 330, 240, distance=125)
+        self.find_account = TextWithLabel(self.win, "Find Account By Id: ", 330, 240, distance=125)
 
-        self.find_account = TextWithLabel(self.win, "Find Account By Id: ", 330, 280, distance=125)
+        self.row_remove = TextWithLabel(self.win, "Remove Card By Id: ", 330, 280, distance=125)
 
-        Button(self.win, text="save", command=self.save_click).place(x=20 , y=280)
+        Button(self.win, text="save", command=self.save_click).place(x=20, y=280)
 
-        Button(self.win, text="edit", command=self.edit_card).place(x=100 , y=280)
+        Button(self.win, text="edit", command=self.edit_card).place(x=100, y=280)
 
-        Button(self.win, text="remove", command=self.remove_card).place(x=650 , y=240)
+        Button(self.win, text="Search", command=self.find_account_by_id).place(x=650, y=240)
 
-        Button(self.win, text="Search", command=self.find_account_by_id).place(x=650 , y=280)
+        Button(self.win, text="remove", command=self.remove_card).place(x=650, y=280)
 
         self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4, 5, 6), show="headings")
 
@@ -108,7 +112,7 @@ class CardView:
         self.table.heading(5, text="password")
         self.table.heading(6, text="account id")
 
-        self.table.place(x=320,y=20)
+        self.table.place(x=320, y=20)
 
         self.reset_form()
 

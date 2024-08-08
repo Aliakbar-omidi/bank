@@ -58,14 +58,26 @@ class TransactionView:
 
     def remove_transaction(self):
         get_id = self.remove_row._variable.get()
-        TransactionController.remove_transaction(get_id)
-        msg.showinfo("remove", "transaction removed!")
-        self.reset_form()
+        find_id = TransactionController.find_by_id(get_id)
+        if find_id:
+            msg.showinfo("Remove", f"TransactionId {get_id} delete?")
+            TransactionController.remove_transaction(get_id)
+            self.reset_form()
+        else:
+            msg.showerror("Error", f"ID {get_id} not found")
+
+    def find_account_by_id(self):
+        get_id = self.find_account._variable.get()
+        find_id = AccountController.find_by_id(get_id)
+        if find_id:
+            msg.showinfo("Find", f"AccountId {get_id} found")
+        else:
+            msg.showerror("Error", f"AccountId {get_id} not found")
 
     def show(self):
         self.win = Tk()
         self.win.title("transaction View")
-        self.win.geometry("1300x450")
+        self.win.geometry("1230x425")
 
         self.id = TextWithLabel(self.win, "ID For Edit: ", 20, 20, distance=115)
 
@@ -85,25 +97,29 @@ class TransactionView:
 
         self.account_id = TextWithLabel(self.win,"account id: ", 20, 340, distance=115)
 
-        self.remove_row = TextWithLabel(self.win,"ID For Remove: ", 360, 260, distance=115)
+        self.find_account = TextWithLabel(self.win,"Find Account By Id: ", 360, 260, distance=165)
 
-        Button(self.win, text= "save", command=self.save_click).place(x=20 , y=380)
+        self.remove_row = TextWithLabel(self.win,"Remove Transaction By Id: ", 360, 300, distance=165)
 
-        Button(self.win, text= "edit", command=self.edit_transaction).place(x=100 , y=380)
+        Button(self.win, text="save", command=self.save_click).place(x=20, y=380)
 
-        Button(self.win, text= "remove", command=self.remove_transaction).place(x=680 ,  y=260)
+        Button(self.win, text="edit", command=self.edit_transaction).place(x=100, y=380)
+
+        Button(self.win, text="Search", command=self.find_account_by_id).place(x=730,  y=260)
+
+        Button(self.win, text="remove", command=self.remove_transaction).place(x=730,  y=300)
 
         self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4, 5, 6, 7, 8, 9), show="headings")
 
-        self.table.column(1, width=100)
+        self.table.column(1, width=75)
         self.table.column(2, width=100)
         self.table.column(3, width=100)
-        self.table.column(4, width=150)
+        self.table.column(4, width=100)
         self.table.column(5, width=100)
         self.table.column(6, width=100)
         self.table.column(7, width=100)
         self.table.column(8, width=100)
-        self.table.column(9, width=100)
+        self.table.column(9, width=75)
 
         self.table.heading(1, text="id")
         self.table.heading(2, text="serial")

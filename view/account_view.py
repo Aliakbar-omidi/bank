@@ -1,10 +1,8 @@
-
 from controller import *
 from tkinter import *
 import tkinter.messagebox as msg
 import tkinter.ttk as ttk
 
-from model.da.da import DataAccess
 from model.entity import *
 from view.check_view import CheckView
 from view.transaction_view import TransactionView
@@ -19,10 +17,13 @@ class AccountView:
         if status:
             for account in account_list:
                 self.table.insert("", END,
-                                  values=(account.id, account.hesab_type, account.hesab_number, account.person_id, account.bank_id))
+                                  values=(account.id, account.hesab_type, account.hesab_number, account.person_id,
+                                          account.bank_id))
 
     def save_click(self):
-        status, result = AccountController.save_account(self.hesab_type._variable.get(), self.hesab_number._variable.get(), self.person_id._variable.get(), self.bank_id._variable.get())
+        status, result = AccountController.save_account(self.hesab_type._variable.get(),
+                                                        self.hesab_number._variable.get(),
+                                                        self.person_id._variable.get(), self.bank_id._variable.get())
         if status:
             entered_data = (
                 f"hesab type: {self.hesab_type._variable.get()}\n"
@@ -36,7 +37,9 @@ class AccountView:
             msg.showerror("Error", result)
 
     def edit_account(self):
-        result = AccountController.edit_account(self.account_id._variable.get(), self.hesab_type._variable.get(), self.hesab_number._variable.get(), self.person_id._variable.get(), self.bank_id._variable.get())
+        result = AccountController.edit_account(self.account_id._variable.get(), self.hesab_type._variable.get(),
+                                                self.hesab_number._variable.get(), self.person_id._variable.get(),
+                                                self.bank_id._variable.get())
         if result:
             entered_data = (
                 f"Id: {self.account_id._variable.get()}\n"
@@ -84,8 +87,6 @@ class AccountView:
         else:
             msg.showerror("Error", f"BankId {get_id} not found")
 
-
-
     def show(self):
         self.win = Tk()
         self.win.title("account View")
@@ -125,7 +126,7 @@ class AccountView:
 
         self.table.column(1, width=70)
         self.table.column(2, width=100)
-        self.table.column(3, width=100)
+        self.table.column(3, width=130)
         self.table.column(4, width=100)
         self.table.column(5, width=100)
 
