@@ -15,7 +15,7 @@ class TransactionView:
                 self.table.insert("", END, values=(transaction.id, transaction.serial, transaction.description, transaction.date_transaction, transaction.time_transaction, transaction.payment_gateway, transaction.price, transaction.status, transaction.account_id))
 
     def save_click(self):
-        status_value = self.status._variable.get()
+        status_value = str(self.status._variable.get())
         status_bool = True if status_value == "True" else False
         status, result = TransactionController.save_transaction(self.serial._variable.get(), self.description._variable.get(), self.date_transaction._variable.get(), self.time_transaction._variable.get(), self.payment_gateway._variable.get(), self.price._variable.get(), status_bool, self.account_id._variable.get())
         if status:
@@ -30,6 +30,7 @@ class TransactionView:
                 f"account id: {self.account_id._variable.get()}"
             )
             msg.showinfo("Save", f"transaction saved? \n {entered_data}")
+            print(status_bool)
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
@@ -64,7 +65,7 @@ class TransactionView:
     def show(self):
         self.win = Tk()
         self.win.title("transaction View")
-        self.win.geometry("1250x450")
+        self.win.geometry("1300x450")
 
         self.id = TextWithLabel(self.win, "ID For Edit: ", 20, 20, distance=115)
 
@@ -114,7 +115,7 @@ class TransactionView:
         self.table.heading(8, text="status")
         self.table.heading(9, text="account id")
 
-        self.table.place(x=335,y=20)
+        self.table.place(x=335, y=20)
 
         self.reset_form()
 

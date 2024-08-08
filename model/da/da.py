@@ -43,7 +43,10 @@ class DataAccess:
 
     def find_by_id(self, id):
         entity = session.get(self.class_name, id)
-        return entity
+        if entity:
+            return msg.showinfo("Data", f"ID {id} is found")
+        else:
+            return msg.showinfo("Data", f"Id {id} not found")
 
     def find_by(self, find_statement):
         entity = session.query(self.class_name).filter(find_statement).all()

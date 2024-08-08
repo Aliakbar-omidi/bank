@@ -15,8 +15,8 @@ class BankView:
 
     def save_click(self):
         status_value = self.status._variable.get()
-        self.status_bool = True if status_value == "True" else False
-        status, result = BankController.save_bank(self.name._variable.get(), self.location._variable.get(),self.start_time._variable.get(), self.end_time._variable.get(),self.branch._variable.get(), self.number_branch._variable.get(), self.status_bool)
+        status_bool = True if str(status_value) == "True" else False
+        status, result = BankController.save_bank(self.name._variable.get(), self.location._variable.get(),self.start_time._variable.get(), self.end_time._variable.get(),self.branch._variable.get(), self.number_branch._variable.get(), status_bool)
         if status:
             entered_data = (
                 f"Name: {self.name._variable.get()}\n"
@@ -25,7 +25,7 @@ class BankView:
                 f"End_Time: {self.end_time._variable.get()}\n"
                 f"Branch: {self.branch._variable.get()}\n"
                 f"Number_Branch: {self.number_branch._variable.get()}\n"
-                f"status: {self.status_bool}\n"
+                f"status: {status_bool}\n"
             )
             msg.showinfo("Save", f"Bank saved? \n {entered_data}")
             self.reset_form()

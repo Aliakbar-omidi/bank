@@ -51,10 +51,14 @@ class CheckView:
         msg.showinfo("Remove", f"checkId {get_id} delete?")
         self.reset_form()
 
+    def find_account_by_id(self):
+        get_id = self.find_account._variable.get()
+        AccountController.find_by_id(get_id)
+
     def show(self):
         self.win = Tk()
         self.win.title("check View")
-        self.win.geometry("1000x400")
+        self.win.geometry("1000x350")
 
         self.id = TextWithLabel(self.win, "ID For Edit: ", 20, 20)
 
@@ -68,13 +72,17 @@ class CheckView:
 
         self.account_id = TextWithLabel(self.win, "Account id: ", 20, 220)
 
-        self.remove_row = TextWithLabel(self.win, "ID For Remove: ", 350, 275)
+        self.find_account = TextWithLabel(self.win, "Find Account By Id: ", 350, 235, distance=130)
+
+        self.remove_row = TextWithLabel(self.win, "Remove Check By Id: ", 350, 275, distance=130)
 
         Button(self.win, text= "save", command=self.save_click).place(x=20 , y=275)
 
         Button(self.win, text= "Edit", command=self.edit_check).place(x=100 , y=275)
 
-        Button(self.win, text= "Remove", command = self.remove_check).place(x=650 , y=275)
+        Button(self.win, text= "search", command = self.find_account_by_id).place(x=670 , y=235)
+
+        Button(self.win, text= "Remove", command = self.remove_check).place(x=670 , y=275)
 
         self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4, 5, 6), show="headings")
 

@@ -37,7 +37,3 @@ class AccountService:
         account_da = DataAccess(Account)
         return account_da.find_by_id(id)
 
-    @staticmethod
-    def find_by_title(title):
-        account_da = DataAccess(Account)
-        return account_da.find_by(Account._title == title)
