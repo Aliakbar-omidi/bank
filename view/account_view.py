@@ -32,6 +32,7 @@ class AccountView:
                 f"bank id: {self.bank_id._variable.get()}\n"
             )
             msg.showinfo("Edit", f"Account saved? \n {entered_data}")
+            msg.showinfo("after_save", f"\n حساب بانکی شما سیو شد و حالا میتوانید برای چک و تراکنش حساب خودتان از دکمه های check و transaction استفاده کنید. *تبریک می گوییم* ")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
