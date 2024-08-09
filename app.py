@@ -2,8 +2,6 @@
 from view import *
 from tkinter import *
 import tkinter.messagebox as msg
-import tkinter.ttk as ttk
-from view.component.label_text import TextWithLabel
 
 
 class FrontView:
@@ -17,23 +15,35 @@ class FrontView:
         ui = BankView()
         ui.show()
 
+    def show_view_check(self):
+        ui = CheckView()
+        ui.show()
+
+    def show_view_transaction(self):
+        ui = TransactionView()
+        ui.show()
+
     def show(self):
         self.win = Tk()
         self.win.title("View")
-        self.win.geometry("200x200")
+        self.win.geometry("630x200")
 
-        Button(self.win, text="ایجاد  حساب ", command=self.show_view_person).place(x=20, y=20)
+        frame1 = Frame(self.win, bd=2, relief="sunken")
+        frame1.place(x=10, y=10, width=300, height=180)
 
-        Button(self.win, text="بانک", command=self.show_view_bank).place(x=20, y=60)
+        frame2 = Frame(self.win, bd=2, relief="sunken")
+        frame2.place(x=320, y=10, width=300, height=180)
 
-        # self.table = ttk.Treeview(self.win, columns=(1,2), show="headings")
+        Label(frame1, text="اگر حساب ندارید ابتدا مشخصات بانک و بعد \n حساب خود را ایجاد کتید.").pack()
+        Button(frame1, text="بانک", command=self.show_view_bank).pack(pady=10)
+        Button(frame1, text="ایجاد حساب", command=self.show_view_person).pack(pady=10)
 
-        # self.table.place(x=320, y=20)
-
-        # self.reset_form()
+        Label(frame2, text="در صورت داشتن حساب از موارد زیر استفاده کنید.").pack()
+        Button(frame2, text="چک", command=self.show_view_check).pack(pady=10)
+        Button(frame2, text="ایجاد تراکنش", command=self.show_view_transaction).pack(pady=10)
 
         self.win.mainloop()
 
 
-ui = AccountView()
+ui = FrontView()
 ui.show()

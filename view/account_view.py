@@ -4,6 +4,7 @@ import tkinter.messagebox as msg
 import tkinter.ttk as ttk
 
 from model.entity import *
+from view import CardView
 from view.check_view import CheckView
 from view.transaction_view import TransactionView
 from view.component.label_text import TextWithLabel
@@ -32,7 +33,7 @@ class AccountView:
                 f"bank id: {self.bank_id._variable.get()}\n"
             )
             msg.showinfo("Edit", f"Account saved? \n {entered_data}")
-            msg.showinfo("after_save", f"\n حساب بانکی شما سیو شد و حالا میتوانید برای چک و تراکنش حساب خودتان از دکمه های check و transaction استفاده کنید. *تبریک می گوییم* ")
+            msg.showinfo("after_save", f"  *تبریک می گوییم*\n حساب بانکی شماایجاد شد و حالا میتوانید برای کارت، جک و تراکنش حساب خودتان از دکمه های card و check و transaction استفاده کنید.")
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
@@ -70,6 +71,10 @@ class AccountView:
 
     def show_transaction(self):
         ui = TransactionView()
+        ui.show()
+
+    def show_card(self):
+        ui = CardView()
         ui.show()
 
     def find_person_by_id(self):
@@ -113,9 +118,11 @@ class AccountView:
 
         Button(self.win, text="Edit", command=self.edit_account).place(x=100, y=240)
 
-        Button(self.win, text="check", command=self.show_check).place(x=20, y=280)
+        Button(self.win, text="card", command=self.show_card).place(x=20, y=280)
 
-        Button(self.win, text="transaction", command=self.show_transaction).place(x=100, y=280)
+        Button(self.win, text="check", command=self.show_check).place(x=100, y=280)
+
+        Button(self.win, text="transaction", command=self.show_transaction).place(x=180, y=280)
 
         Button(self.win, text="Search", command=self.find_bank_by_id).place(x=700, y=240)
 
