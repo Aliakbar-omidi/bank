@@ -33,7 +33,10 @@ class AccountView:
                 f"bank id: {self.bank_id._variable.get()}\n"
             )
             msg.showinfo("Edit", f"Account saved? \n {entered_data}")
-            msg.showinfo("after_save", f"  *تبریک می گوییم*\n حساب بانکی شماایجاد شد و حالا میتوانید برای کارت، جک و تراکنش حساب خودتان از دکمه های card و check و transaction استفاده کنید.")
+            msg.showinfo("after_save", f"  *تبریک می گوییم*\n حساب بانکی شماایجاد شد و حالا میتوانید برای کارت، چک و تراکنش حساب خودتان از دکمه های card و check و transaction استفاده کنید.")
+            self.card_btn.place(x=20, y=280)
+            self.check_btn.place(x=100, y=280)
+            self.transaction_btn.place(x=180, y=280)
             self.reset_form()
         elif result.startswith("Error"):
             msg.showerror("Error", result)
@@ -45,7 +48,7 @@ class AccountView:
             msg.showinfo("Edit", f"آیدی {get_id} پیدا شد حالا میتوانید فیلدهارا ادیت کنید و در نهایت دکمه ی Edit رو بزنید.")
             self.edit_button.place(x=100, y=240)
             self.s_button.place_forget()
-            self.table.place(x=320, y=20)
+            self.table.place(x=335, y=20)
             self.win.geometry("890x370")
             self.hesab_type.set_variable(find_id.hesab_type)
             self.hesab_number.set_variable(find_id.hesab_number)
@@ -112,17 +115,17 @@ class AccountView:
     def show(self):
         self.win = Tk()
         self.win.title("account View")
-        self.win.geometry("915x370")
+        self.win.geometry("930x370")
 
-        self.account_id = TextWithLabel(self.win, "Id For Edit : ", 20, 20)
+        self.account_id = TextWithLabel(self.win, "AccountId For Edit : ", 20, 20, distance=115)
 
-        self.hesab_type = TextWithLabel(self.win, "hesab type: ", 20, 60)
+        self.hesab_type = TextWithLabel(self.win, "hesab type: ", 20, 60, distance=115)
 
-        self.hesab_number = TextWithLabel(self.win, "hesab number: ", 20, 100)
+        self.hesab_number = TextWithLabel(self.win, "hesab number: ", 20, 100, distance=115)
 
-        self.person_id = TextWithLabel(self.win, "person id: ", 20, 140)
+        self.person_id = TextWithLabel(self.win, "person id: ", 20, 140, distance=115)
 
-        self.bank_id = TextWithLabel(self.win, "bank id: ", 20, 180)
+        self.bank_id = TextWithLabel(self.win, "bank id: ", 20, 180, distance=115)
 
         self.find_bank = TextWithLabel(self.win, "Find Bank By Id: ", 350, 240, distance=150)
 
@@ -135,13 +138,13 @@ class AccountView:
         self.edit_button = Button(self.win, text="Edit", command=self.edit_account)
 
         self.s_button = Button(self.win, text="Search", command=self.b_edit_account)
-        self.s_button.place(x=310, y=20)
+        self.s_button.place(x=325, y=20)
 
-        Button(self.win, text="card", command=self.show_card).place(x=20, y=280)
+        self.card_btn = Button(self.win, text="card", command=self.show_card)
 
-        Button(self.win, text="check", command=self.show_check).place(x=100, y=280)
+        self.check_btn = Button(self.win, text="check", command=self.show_check)
 
-        Button(self.win, text="transaction", command=self.show_transaction).place(x=180, y=280)
+        self.transaction_btn = Button(self.win, text="transaction", command=self.show_transaction)
 
         Button(self.win, text="Search", command=self.find_bank_by_id).place(x=700, y=240)
 
@@ -163,7 +166,7 @@ class AccountView:
         self.table.heading(4, text="person id")
         self.table.heading(5, text="bank id")
 
-        self.table.place(x=390, y=20)
+        self.table.place(x=405, y=20)
 
         self.reset_form()
 

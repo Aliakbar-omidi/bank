@@ -1,4 +1,3 @@
-
 from controller import *
 from tkinter import *
 import tkinter.messagebox as msg
@@ -12,12 +11,21 @@ class TransactionView:
         status, transaction_list = TransactionController.find_all()
         if status:
             for transaction in transaction_list:
-                self.table.insert("", END, values=(transaction.id, transaction.serial, transaction.description, transaction.date_transaction, transaction.time_transaction, transaction.payment_gateway, transaction.price, transaction.status, transaction.account_id))
+                self.table.insert("", END, values=(
+                transaction.id, transaction.serial, transaction.description, transaction.date_transaction,
+                transaction.time_transaction, transaction.payment_gateway, transaction.price, transaction.status,
+                transaction.account_id))
 
     def save_click(self):
         status_value = str(self.status._variable.get())
         status_bool = True if status_value == "True" else False
-        status, result = TransactionController.save_transaction(self.serial._variable.get(), self.description._variable.get(), self.date_transaction._variable.get(), self.time_transaction._variable.get(), self.payment_gateway._variable.get(), self.price._variable.get(), status_bool, self.account_id._variable.get())
+        status, result = TransactionController.save_transaction(self.serial._variable.get(),
+                                                                self.description._variable.get(),
+                                                                self.date_transaction._variable.get(),
+                                                                self.time_transaction._variable.get(),
+                                                                self.payment_gateway._variable.get(),
+                                                                self.price._variable.get(), status_bool,
+                                                                self.account_id._variable.get())
         if status:
             entered_data = (
                 f"serial: {self.serial._variable.get()}\n"
@@ -35,10 +43,37 @@ class TransactionView:
         elif result.startswith("Error"):
             msg.showerror("Error", result)
 
+    def b_edit_transaction(self):
+        get_id = self.id._variable.get()
+        find_id = TransactionController.find_by_id(get_id)
+        if find_id:
+            msg.showinfo("Edit",
+                         f"آیدی {get_id} پیدا شد حالا میتوانید فیلدهارا ادیت کنید و در نهایت دکمه ی Edit رو بزنید.")
+            self.edit_button.place(x=100, y=380)
+            self.s_button.place_forget()
+            self.table.place(x=335, y=20)
+            self.win.geometry("1230x425")
+            self.serial.set_variable(find_id.serial)
+            self.description.set_variable(find_id.description)
+            self.date_transaction.set_variable(find_id.date_transaction)
+            self.time_transaction.set_variable(find_id.time_transaction)
+            self.payment_gateway.set_variable(find_id.payment_gateway)
+            self.price.set_variable(find_id.price)
+            self.status.set_variable(find_id.status)
+            self.account_id.set_variable(find_id.account_id)
+        else:
+            msg.showerror("Error", f"ID {get_id} not found")
+
     def edit_transaction(self):
         status_value = self.status._variable.get()
         status_bool = True if status_value == "True" else False
-        result = TransactionController.edit_transaction(self.id._variable.get(), self.serial._variable.get(), self.description._variable.get(), self.date_transaction._variable.get(), self.time_transaction._variable.get(), self.payment_gateway._variable.get(), self.price._variable.get(), status_bool, self.account_id._variable.get())
+        result = TransactionController.edit_transaction(self.id._variable.get(), self.serial._variable.get(),
+                                                        self.description._variable.get(),
+                                                        self.date_transaction._variable.get(),
+                                                        self.time_transaction._variable.get(),
+                                                        self.payment_gateway._variable.get(),
+                                                        self.price._variable.get(), status_bool,
+                                                        self.account_id._variable.get())
         if result:
             entered_data = (
                 f"ID: {self.id._variable.get()}\n"
@@ -77,7 +112,7 @@ class TransactionView:
     def show(self):
         self.win = Tk()
         self.win.title("transaction View")
-        self.win.geometry("1230x425")
+        self.win.geometry("1300x425")
 
         self.id = TextWithLabel(self.win, "ID For Edit: ", 20, 20, distance=115)
 
@@ -95,19 +130,22 @@ class TransactionView:
 
         self.status = TextWithLabel(self.win, "status: ", 20, 300, distance=115)
 
-        self.account_id = TextWithLabel(self.win,"account id: ", 20, 340, distance=115)
+        self.account_id = TextWithLabel(self.win, "account id: ", 20, 340, distance=115)
 
-        self.find_account = TextWithLabel(self.win,"Find Account By Id: ", 360, 260, distance=165)
+        self.find_account = TextWithLabel(self.win, "Find Account By Id: ", 360, 260, distance=165)
 
-        self.remove_row = TextWithLabel(self.win,"Remove Transaction By Id: ", 360, 300, distance=165)
+        self.remove_row = TextWithLabel(self.win, "Remove Transaction By Id: ", 360, 300, distance=165)
 
         Button(self.win, text="save", command=self.save_click).place(x=20, y=380)
 
-        Button(self.win, text="edit", command=self.edit_transaction).place(x=100, y=380)
+        self.s_button = Button(self.win, text="Search", command=self.b_edit_transaction)
+        self.s_button.place(x=325, y=20)
 
-        Button(self.win, text="Search", command=self.find_account_by_id).place(x=730,  y=260)
+        self.edit_button = Button(self.win, text="edit", command=self.edit_transaction)
 
-        Button(self.win, text="remove", command=self.remove_transaction).place(x=730,  y=300)
+        Button(self.win, text="Search", command=self.find_account_by_id).place(x=730, y=260)
+
+        Button(self.win, text="remove", command=self.remove_transaction).place(x=730, y=300)
 
         self.table = ttk.Treeview(self.win, columns=(1, 2, 3, 4, 5, 6, 7, 8, 9), show="headings")
 
@@ -131,7 +169,7 @@ class TransactionView:
         self.table.heading(8, text="status")
         self.table.heading(9, text="account id")
 
-        self.table.place(x=335, y=20)
+        self.table.place(x=405, y=20)
 
         self.reset_form()
 

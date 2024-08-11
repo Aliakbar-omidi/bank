@@ -94,7 +94,7 @@ class BankView:
         self.win.title("Bank View")
         self.win.geometry("1170x400")
 
-        self.id = TextWithLabel(self.win, "ID For Edit: ", 20, 20)
+        self.id = TextWithLabel(self.win, "BankID For Edit: ", 20, 20)
 
         self.name = TextWithLabel(self.win, "Name: ", 20, 60)
 
