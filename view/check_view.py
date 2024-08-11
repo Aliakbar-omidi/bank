@@ -31,6 +31,23 @@ class CheckView:
         elif result.startswith("Error"):
             msg.showerror("Error", result)
 
+    def b_edit_check(self):
+        get_id = self.id._variable.get()
+        find_id = CheckController.find_by_id(get_id)
+        if find_id:
+            msg.showinfo("Edit", f"آیدی {get_id} پیدا شد حالا میتوانید فیلدهارا ادیت کنید و در نهایت دکمه ی Edit رو بزنید.")
+            self.edit_button.place(x=100, y=275)
+            self.s_button.place_forget()
+            self.table.place(x=320, y=20)
+            self.win.geometry("940x350")
+            self.check_serial.set_variable(find_id.check_serial)
+            self.price.set_variable(find_id.price)
+            self.date_now.set_variable(find_id.date_now)
+            self.date_end.set_variable(find_id.date_end)
+            self.account_id.set_variable(find_id.account_id)
+        else:
+            msg.showerror("Error", f"ID {get_id} not found")
+
     def edit_check(self):
         result = CheckController.edit_check(self.id._variable.get(), self.check_serial._variable.get(),
                                             self.price._variable.get(), self.date_now._variable.get(),
@@ -51,10 +68,10 @@ class CheckView:
 
     def remove_check(self):
         get_id = self.remove_row._variable.get()
-        find_id = CardController.find_by_id(get_id)
+        find_id = CheckController.find_by_id(get_id)
         if find_id:
-            msg.showinfo("Remove", f"AccountId {get_id} delete?")
-            CardController.remove_card(get_id)
+            msg.showinfo("Remove", f"CheckId {get_id} delete?")
+            CheckController.remove_check(get_id)
             self.reset_form()
         else:
             msg.showerror("Error", f"ID {get_id} not found")
@@ -90,7 +107,10 @@ class CheckView:
 
         Button(self.win, text="Save", command=self.save_click).place(x=20, y=275)
 
-        Button(self.win, text="Edit", command=self.edit_check).place(x=100, y=275)
+        self.s_button = Button(self.win, text="Search", command=self.b_edit_check)
+        self.s_button.place(x=310, y=20)
+
+        self.edit_button = Button(self.win, text="Edit", command=self.edit_check)
 
         Button(self.win, text="Search", command=self.find_account_by_id).place(x=675, y=235)
 
@@ -112,7 +132,7 @@ class CheckView:
         self.table.heading(5, text="date end")
         self.table.heading(6, text="account id")
 
-        self.table.place(x=320, y=20)
+        self.table.place(x=390, y=20)
 
         self.reset_form()
 

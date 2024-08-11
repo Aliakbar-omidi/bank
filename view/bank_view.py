@@ -44,6 +44,8 @@ class BankView:
             msg.showinfo("Edit", f"آیدی {get_id} پیدا شد حالا میتوانید فیلدهارا ادیت کنید و در نهایت دکمه ی Edit رو بزنید.")
             self.edit_button.place(x=100, y=350)
             self.s_button.place_forget()
+            self.table.place(x=320, y=20)
+            self.win.geometry("1100x400")
             self.name.set_variable(find_id.name)
             self.location.set_variable(find_id.location)
             self.start_time.set_variable(find_id.start_time)

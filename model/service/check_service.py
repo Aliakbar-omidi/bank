@@ -37,7 +37,3 @@ class CheckService:
         check_da = DataAccess(Check)
         return check_da.find_by_id(id)
 
-    @staticmethod
-    def find_by_title(title):
-        check_da = DataAccess(Check)
-        return check_da.find_by(Check._title == title)
