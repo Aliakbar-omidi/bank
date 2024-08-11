@@ -38,6 +38,8 @@ class CardView:
             msg.showinfo("Edit", f"آیدی {get_id} پیدا شد حالا میتوانید فیلدهارا ادیت کنید و در نهایت دکمه ی Edit رو بزنید.")
             self.edit_button.place(x=100, y=280)
             self.s_button.place_forget()
+            self.table.place(x=320, y=20)
+            self.win.geometry("910x350")
             self.number_card.set_variable(find_id.number_card)
             self.cvv2.set_variable(find_id.cvv2)
             self.expiration_date.set_variable(find_id.expiration_date)
@@ -87,7 +89,7 @@ class CardView:
         self.win.title("card View")
         self.win.geometry("970x350")
 
-        self.id = TextWithLabel(self.win, "ID For Edit: ", 20, 20)
+        self.id = TextWithLabel(self.win, "CardID For Edit: ", 20, 20)
 
         self.number_card = TextWithLabel(self.win, "number card: ", 20, 60)
 

@@ -45,6 +45,8 @@ class AccountView:
             msg.showinfo("Edit", f"آیدی {get_id} پیدا شد حالا میتوانید فیلدهارا ادیت کنید و در نهایت دکمه ی Edit رو بزنید.")
             self.edit_button.place(x=100, y=240)
             self.s_button.place_forget()
+            self.table.place(x=320, y=20)
+            self.win.geometry("890x370")
             self.hesab_type.set_variable(find_id.hesab_type)
             self.hesab_number.set_variable(find_id.hesab_number)
             self.person_id.set_variable(find_id.person_id)
