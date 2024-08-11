@@ -31,6 +31,21 @@ class CardView:
         elif result.startswith("Error"):
             msg.showerror("Error", result)
 
+    def b_edit_card(self):
+        get_id = self.id._variable.get()
+        find_id = CardController.find_by_id(get_id)
+        if find_id:
+            msg.showinfo("Edit", f"آیدی {get_id} پیدا شد حالا میتوانید فیلدهارا ادیت کنید و در نهایت دکمه ی Edit رو بزنید.")
+            self.edit_button.place(x=100, y=280)
+            self.s_button.place_forget()
+            self.number_card.set_variable(find_id.number_card)
+            self.cvv2.set_variable(find_id.cvv2)
+            self.expiration_date.set_variable(find_id.expiration_date)
+            self.password.set_variable(find_id.password)
+            self.account_id.set_variable(find_id.account_id)
+        else:
+            msg.showerror("Error", f"ID {get_id} not found")
+
     def edit_card(self):
         result = CardController.edit_card(self.id._variable.get(), self.number_card._variable.get(),
                                           self.cvv2._variable.get(), self.expiration_date._variable.get(),
@@ -70,7 +85,7 @@ class CardView:
     def show(self):
         self.win = Tk()
         self.win.title("card View")
-        self.win.geometry("900x350")
+        self.win.geometry("970x350")
 
         self.id = TextWithLabel(self.win, "ID For Edit: ", 20, 20)
 
@@ -90,7 +105,10 @@ class CardView:
 
         Button(self.win, text="save", command=self.save_click).place(x=20, y=280)
 
-        Button(self.win, text="edit", command=self.edit_card).place(x=100, y=280)
+        self.s_button = Button(self.win, text="Search", command=self.b_edit_card)
+        self.s_button.place(x=310, y=20)
+
+        self.edit_button = Button(self.win, text="edit", command=self.edit_card)
 
         Button(self.win, text="Search", command=self.find_account_by_id).place(x=650, y=240)
 
@@ -112,7 +130,7 @@ class CardView:
         self.table.heading(5, text="password")
         self.table.heading(6, text="account id")
 
-        self.table.place(x=320, y=20)
+        self.table.place(x=390, y=20)
 
         self.reset_form()
 

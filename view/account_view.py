@@ -38,6 +38,20 @@ class AccountView:
         elif result.startswith("Error"):
             msg.showerror("Error", result)
 
+    def b_edit_account(self):
+        get_id = self.account_id._variable.get()
+        find_id = AccountController.find_by_id(get_id)
+        if find_id:
+            msg.showinfo("Edit", f"آیدی {get_id} پیدا شد حالا میتوانید فیلدهارا ادیت کنید و در نهایت دکمه ی Edit رو بزنید.")
+            self.edit_button.place(x=100, y=240)
+            self.s_button.place_forget()
+            self.hesab_type.set_variable(find_id.hesab_type)
+            self.hesab_number.set_variable(find_id.hesab_number)
+            self.person_id.set_variable(find_id.person_id)
+            self.bank_id.set_variable(find_id.bank_id)
+        else:
+            msg.showerror("Error", f"ID {get_id} not found")
+
     def edit_account(self):
         result = AccountController.edit_account(self.account_id._variable.get(), self.hesab_type._variable.get(),
                                                 self.hesab_number._variable.get(), self.person_id._variable.get(),
@@ -79,8 +93,8 @@ class AccountView:
 
     def find_person_by_id(self):
         get_id = self.find_person._variable.get()
-        find_id = PersonController.find_by_id(get_id)
-        if find_id:
+        status, find_id = PersonController.find_by_id(get_id)
+        if status:
             msg.showinfo("Find", f"PersonId {get_id} found")
         else:
             msg.showerror("Error", f"PersonId {get_id} not found")
@@ -116,8 +130,10 @@ class AccountView:
 
         Button(self.win, text="save", command=self.save_click).place(x=20, y=240)
 
-        Button(self.win, text="Edit", command=self.edit_account).place(x=100, y=240)
+        self.edit_button = Button(self.win, text="Edit", command=self.edit_account)
 
+        self.s_button = Button(self.win, text="Search", command=self.b_edit_account)
+        self.s_button.place(x=310, y=20)
         Button(self.win, text="card", command=self.show_card).place(x=20, y=280)
 
         Button(self.win, text="check", command=self.show_check).place(x=100, y=280)
@@ -144,7 +160,7 @@ class AccountView:
         self.table.heading(4, text="person id")
         self.table.heading(5, text="bank id")
 
-        self.table.place(x=350, y=20)
+        self.table.place(x=390, y=20)
 
         self.reset_form()
 

@@ -18,3 +18,6 @@ class TextWithLabel:
         else:
             self.text_box = Entry(master, textvariable=self._variable)
             self.text_box.place(x=x + distance, y=y)
+
+    def set_variable(self, variable):
+        self._variable.set(variable)
