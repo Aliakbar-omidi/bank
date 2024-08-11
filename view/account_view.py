@@ -136,6 +136,7 @@ class AccountView:
 
         self.s_button = Button(self.win, text="Search", command=self.b_edit_account)
         self.s_button.place(x=310, y=20)
+
         Button(self.win, text="card", command=self.show_card).place(x=20, y=280)
 
         Button(self.win, text="check", command=self.show_check).place(x=100, y=280)

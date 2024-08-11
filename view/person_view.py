@@ -36,6 +36,24 @@ class PersonView:
         elif result.startswith("Error"):
             msg.showerror("Error", result)
 
+    def b_edit_person(self):
+        get_id = self.id._variable.get()
+        find_id = PersonController.find_by_id(get_id)
+        if find_id:
+            msg.showinfo("Edit", f"آیدی {get_id} پیدا شد حالا میتوانید فیلدهارا ادیت کنید و در نهایت دکمه ی Edit رو بزنید.")
+            self.edit_button.place(x=100, y=340)
+            self.s_button.place_forget()
+            self.table.place(x=335, y=20)
+            self.win.geometry("1150x400")
+            self.name.set_variable(find_id.name)
+            self.family.set_variable(find_id.family)
+            self.national_id.set_variable(find_id.national_id)
+            self.birthdate.set_variable(find_id.birthdate)
+            self.phone.set_variable(find_id.phone)
+            self.email.set_variable(find_id.email)
+        else:
+            msg.showerror("Error", f"ID {get_id} not found")
+
     def edit_person(self):
         result = PersonController.edit_person(self.id._variable.get(), self.name._variable.get(),
                                               self.family._variable.get(), self.national_id._variable.get(),
@@ -73,27 +91,30 @@ class PersonView:
     def show(self):
         self.win = Tk()
         self.win.title("person View")
-        self.win.geometry("1150x400")
+        self.win.geometry("1220x400")
 
-        self.id = TextWithLabel(self.win, "ID For ٍEdit: ", 20, 20)
+        self.id = TextWithLabel(self.win, "PersonID For ٍEdit: ", 20, 20, distance=115)
 
-        self.name = TextWithLabel(self.win, "name: ", 20, 60)
+        self.name = TextWithLabel(self.win, "name: ", 20, 60, distance=115)
 
-        self.family = TextWithLabel(self.win, "family: ", 20, 100)
+        self.family = TextWithLabel(self.win, "family: ", 20, 100, distance=115)
 
-        self.national_id = TextWithLabel(self.win, "national id: ", 20, 140)
+        self.national_id = TextWithLabel(self.win, "national id: ", 20, 140, distance=115)
 
-        self.birthdate = TextWithLabel(self.win, "birthdate: ", 20, 180)
+        self.birthdate = TextWithLabel(self.win, "birthdate: ", 20, 180, distance=115)
 
-        self.phone = TextWithLabel(self.win, "phone: ", 20, 220)
+        self.phone = TextWithLabel(self.win, "phone: ", 20, 220, distance=115)
 
-        self.email = TextWithLabel(self.win, "email: ", 20, 260)
+        self.email = TextWithLabel(self.win, "email: ", 20, 260, distance=115)
 
         self.remove_row = TextWithLabel(self.win, "ID For Remove:", 360, 260)
 
         Button(self.win, text="save", command=self.save_click).place(x=20, y=340)
 
-        Button(self.win, text="edit", command=self.edit_person).place(x=100, y=340)
+        self.s_button = Button(self.win, text="Search", command=self.b_edit_person)
+        self.s_button.place(x=325, y=20)
+
+        self.edit_button = Button(self.win, text="edit", command=self.edit_person)
 
         Button(self.win, text="remove", command=self.remove_person).place(x=660, y=260)
 
@@ -117,7 +138,7 @@ class PersonView:
         self.table.heading(6, text="phone")
         self.table.heading(7, text="email")
 
-        self.table.place(x=320, y=20)
+        self.table.place(x=405, y=20)
 
         self.reset_form()
 

@@ -38,7 +38,7 @@ class CheckView:
             msg.showinfo("Edit", f"آیدی {get_id} پیدا شد حالا میتوانید فیلدهارا ادیت کنید و در نهایت دکمه ی Edit رو بزنید.")
             self.edit_button.place(x=100, y=275)
             self.s_button.place_forget()
-            self.table.place(x=320, y=20)
+            self.table.place(x=330, y=20)
             self.win.geometry("940x350")
             self.check_serial.set_variable(find_id.check_serial)
             self.price.set_variable(find_id.price)
@@ -87,19 +87,19 @@ class CheckView:
     def show(self):
         self.win = Tk()
         self.win.title("check View")
-        self.win.geometry("1000x350")
+        self.win.geometry("1010x350")
 
-        self.id = TextWithLabel(self.win, "ID For Edit: ", 20, 20)
+        self.id = TextWithLabel(self.win, "CheckID For Edit: ", 20, 20, distance=110)
 
-        self.check_serial = TextWithLabel(self.win, "number check: ", 20, 60)
+        self.check_serial = TextWithLabel(self.win, "number check: ", 20, 60, distance=110)
 
-        self.price = TextWithLabel(self.win, "Price: ", 20, 100)
+        self.price = TextWithLabel(self.win, "Price: ", 20, 100, distance=110)
 
-        self.date_now = TextWithLabel(self.win, "Aate now: ", 20, 140)
+        self.date_now = TextWithLabel(self.win, "Aate now: ", 20, 140, distance=110)
 
-        self.date_end = TextWithLabel(self.win, "Aate end: ", 20, 180)
+        self.date_end = TextWithLabel(self.win, "Aate end: ", 20, 180, distance=110)
 
-        self.account_id = TextWithLabel(self.win, "Account id: ", 20, 220)
+        self.account_id = TextWithLabel(self.win, "Account id: ", 20, 220, distance=110)
 
         self.find_account = TextWithLabel(self.win, "Find Account By Id: ", 350, 235, distance=133)
 
@@ -108,7 +108,7 @@ class CheckView:
         Button(self.win, text="Save", command=self.save_click).place(x=20, y=275)
 
         self.s_button = Button(self.win, text="Search", command=self.b_edit_check)
-        self.s_button.place(x=310, y=20)
+        self.s_button.place(x=320, y=20)
 
         self.edit_button = Button(self.win, text="Edit", command=self.edit_check)
 
@@ -132,7 +132,7 @@ class CheckView:
         self.table.heading(5, text="date end")
         self.table.heading(6, text="account id")
 
-        self.table.place(x=390, y=20)
+        self.table.place(x=400, y=20)
 
         self.reset_form()
 
