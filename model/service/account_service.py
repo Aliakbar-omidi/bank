@@ -36,4 +36,3 @@ class AccountService:
     def find_by_id(id):
         account_da = DataAccess(Account)
         return account_da.find_by_id(id)
-

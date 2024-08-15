@@ -1,4 +1,3 @@
-
 from model.entity import *
 
 
@@ -13,7 +12,7 @@ class Bank(Base):
     _number_branch = Column("number_branch", Integer)
     _status = Column("status", Boolean)
 
-    account = relationship("Account",back_populates="bank")
+    account = relationship("Account", back_populates="bank")
 
     def __init__(self, name, location, start_time, end_time, branch, number_branch, status):
         self.id = None
@@ -46,7 +45,7 @@ class Bank(Base):
         return self._location
 
     @location.setter
-    def location(self,location):
+    def location(self, location):
         self._location = location
 
     @property
@@ -78,7 +77,7 @@ class Bank(Base):
         return self._number_branch
 
     @number_branch.setter
-    def number_branch(self,number_branch):
+    def number_branch(self, number_branch):
         self._number_branch = number_branch
 
     @property
@@ -87,4 +86,4 @@ class Bank(Base):
 
     @status.setter
     def status(self, status):
-        self._status = boolean_validator(status,"Invalid status4")
+        self._status = boolean_validator(status, "Invalid status4")

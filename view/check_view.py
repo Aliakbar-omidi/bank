@@ -35,7 +35,8 @@ class CheckView:
         get_id = self.id._variable.get()
         find_id = CheckController.find_by_id(get_id)
         if find_id:
-            msg.showinfo("Edit", f"آیدی {get_id} پیدا شد حالا میتوانید فیلدهارا ادیت کنید و در نهایت دکمه ی Edit رو بزنید.")
+            msg.showinfo("Edit",
+                         f"آیدی {get_id} پیدا شد حالا میتوانید فیلدهارا ادیت کنید و در نهایت دکمه ی Edit رو بزنید.")
             self.edit_button.place(x=100, y=275)
             self.s_button.place_forget()
             self.table.place(x=330, y=20)

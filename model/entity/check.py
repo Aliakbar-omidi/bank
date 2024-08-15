@@ -1,4 +1,3 @@
-
 from model.entity import *
 
 
@@ -33,7 +32,7 @@ class Check(Base):
         return self._check_serial
 
     @check_serial.setter
-    def check_serial(self,check_serial):
+    def check_serial(self, check_serial):
         self._check_serial = check_serial
 
     @property

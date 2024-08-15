@@ -1,4 +1,3 @@
-
 from model.entity import *
 
 
@@ -12,7 +11,7 @@ class Person(Base):
     _phone = Column("phone", Integer)
     _email = Column("email", String(30))
 
-    account = relationship("Account",back_populates="person")
+    account = relationship("Account", back_populates="person")
 
     def __init__(self, name, family, national_id, birthdate, phone, email):
         self.id = None
@@ -77,4 +76,4 @@ class Person(Base):
 
     @email.setter
     def email(self, email):
-        self._email = email_validator(email,"Invalid email")
+        self._email = email_validator(email, "Invalid email")

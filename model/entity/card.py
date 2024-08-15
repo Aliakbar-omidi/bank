@@ -1,4 +1,3 @@
-
 from model.entity import *
 
 
@@ -6,7 +5,7 @@ class Card(Base):
     __tablename__ = "card_tbl"
     _id = Column("id", Integer, primary_key=True, autoincrement=True)
     _number_card = Column("number_card", Integer, nullable=False)
-    _cvv2 = Column("cvv2",Integer, nullable=False)
+    _cvv2 = Column("cvv2", Integer, nullable=False)
     _expiration_date = Column("expiration_date", Date, nullable=False)
     _password = Column("password", String(20), nullable=False)
 

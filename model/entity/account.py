@@ -1,17 +1,16 @@
-
 from model.entity import *
 
 
 class Account(Base):
     __tablename__ = 'account_tbl'
-    _id = Column("id",Integer, primary_key=True, autoincrement=True)
+    _id = Column("id", Integer, primary_key=True, autoincrement=True)
     _hesab_type = Column("hesab_type", String(30), nullable=False)
-    _hesab_number = Column("hesab_number", Integer , default=0, nullable=False)
+    _hesab_number = Column("hesab_number", Integer, default=0, nullable=False)
 
     _person_id = Column("person_id", Integer, ForeignKey("person_tbl.id"))
     person = relationship("Person")
 
-    _bank_id = Column("bank_id",Integer, ForeignKey("bank_tbl.id"))
+    _bank_id = Column("bank_id", Integer, ForeignKey("bank_tbl.id"))
     bank = relationship("Bank")
 
     def __init__(self, hesab_type, hesab_number):

@@ -1,10 +1,9 @@
-
 from model.entity import *
 
 
 class Transaction(Base):
     __tablename__ = 'transaction_tbl'
-    _id = Column("id",Integer, primary_key=True, autoincrement=True)
+    _id = Column("id", Integer, primary_key=True, autoincrement=True)
     _serial = Column("serial", Integer, nullable=False)
     _description = Column("description", String(30), nullable=False)
     _date_transaction = Column("date_transaction", Date, nullable=False)

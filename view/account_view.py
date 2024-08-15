@@ -33,7 +33,8 @@ class AccountView:
                 f"bank id: {self.bank_id._variable.get()}\n"
             )
             msg.showinfo("Edit", f"Account saved? \n {entered_data}")
-            msg.showinfo("after_save", f"  *تبریک می گوییم*\n حساب بانکی شماایجاد شد و حالا میتوانید برای کارت، چک و تراکنش حساب خودتان از دکمه های card و check و transaction استفاده کنید.")
+            msg.showinfo("after_save",
+                         f"  *تبریک می گوییم*\n حساب بانکی شماایجاد شد و حالا میتوانید برای کارت، چک و تراکنش حساب خودتان از دکمه های card و check و transaction استفاده کنید.")
             self.card_btn.place(x=20, y=280)
             self.check_btn.place(x=100, y=280)
             self.transaction_btn.place(x=180, y=280)
@@ -45,7 +46,8 @@ class AccountView:
         get_id = self.account_id._variable.get()
         find_id = AccountController.find_by_id(get_id)
         if find_id:
-            msg.showinfo("Edit", f"آیدی {get_id} پیدا شد حالا میتوانید فیلدهارا ادیت کنید و در نهایت دکمه ی Edit رو بزنید.")
+            msg.showinfo("Edit",
+                         f"آیدی {get_id} پیدا شد حالا میتوانید فیلدهارا ادیت کنید و در نهایت دکمه ی Edit رو بزنید.")
             self.edit_button.place(x=100, y=240)
             self.s_button.place_forget()
             self.table.place(x=335, y=20)

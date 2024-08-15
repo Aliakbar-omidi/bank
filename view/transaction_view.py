@@ -12,9 +12,9 @@ class TransactionView:
         if status:
             for transaction in transaction_list:
                 self.table.insert("", END, values=(
-                transaction.id, transaction.serial, transaction.description, transaction.date_transaction,
-                transaction.time_transaction, transaction.payment_gateway, transaction.price, transaction.status,
-                transaction.account_id))
+                    transaction.id, transaction.serial, transaction.description, transaction.date_transaction,
+                    transaction.time_transaction, transaction.payment_gateway, transaction.price, transaction.status,
+                    transaction.account_id))
 
     def save_click(self):
         status_value = str(self.status._variable.get())
