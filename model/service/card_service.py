@@ -1,3 +1,4 @@
+
 from controller.exceptions.exeptions import BankNotFoundError
 from model.da.da import DataAccess
 from model.entity import *
@@ -36,8 +37,3 @@ class CardService:
     def find_by_id(id):
         card_da = DataAccess(Card)
         return card_da.find_by_id(id)
-
-    @staticmethod
-    def find_by_title(title):
-        card_da = DataAccess(Card)
-        return card_da.find_by(Card._title == title)
