@@ -6,7 +6,7 @@ import tkinter.messagebox as msg
 class FrontView:
 
     def show_view_person(self):
-        msg.showinfo("question", "برای ایجاد حساب بانکی ابتدا مشخصات خود را وارد کنید ")
+        msg.showinfo("question", "برای ایجاد حساب بانکی ابتدا مشخصات فردی خود را وارد کنید ")
         ui = PersonView()
         ui.show()
 
@@ -42,6 +42,7 @@ class FrontView:
         Button(frame2, text="ایجاد تراکنش", command=self.show_view_transaction).pack(pady=10)
 
         self.win.mainloop()
+
 
 ui = FrontView()
 ui.show()
