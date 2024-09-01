@@ -45,6 +45,5 @@ class FrontView:
         self.win.mainloop()
 
 
-
 ui = FrontView()
 ui.show()
