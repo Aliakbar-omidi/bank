@@ -11,7 +11,7 @@ class BankController:
             bank = Bank(name, location, start_time, end_time, branch, number_branch, status)
             BankService.save(bank)
             Logger.info(f"bank saved {bank}")
-            return True,bank
+            return True, bank
         except Exception as e:
             Logger.error(f"{e}")
             return False, f"{e}"
@@ -33,7 +33,7 @@ class BankController:
         try:
             bank = BankService.remove(id)
             Logger.info(f"bank removed {bank}")
-            return True,bank
+            return True, bank
         except Exception as e:
             Logger.error(f"{e}")
             return False, f"{e}"
