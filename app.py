@@ -33,7 +33,7 @@ class FrontView:
         frame2 = Frame(self.win, bd=2, relief="sunken")
         frame2.place(x=320, y=10, width=300, height=200)
 
-        Label(frame1, text="اگر حساب ندارید ابتدا مشخصات بانک و بعد \n حساب خود را ایجاد کتید.",
+        Label(frame1, text="اگر حساب ندارید ابتدا مشخصات بانک و بعد \n حساب خود را ایجاد کنید.",
               font=("Arial", 12)).pack(pady=10)
         Button(frame1, text="بانک", command=self.show_view_bank, font=("Arial", 12)).pack(pady=10)
         Button(frame1, text="ایجاد حساب", command=self.show_view_person, font=("Arial", 12)).pack(pady=10)
