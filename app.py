@@ -36,7 +36,7 @@ class FrontView:
         Label(frame1, text="اگر حساب ندارید ابتدا مشخصات بانک و بعد \n حساب خود را ایجاد کتید.",
               font=("Arial", 12)).pack(pady=10)
         Button(frame1, text="بانک", command=self.show_view_bank, font=("Arial", 12)).pack(pady=10)
-        Button(frame1, text="ایجاد حساب", command=self.show_view_person, bg="#008CBA", font=("Arial", 12)).pack(pady=10)
+        Button(frame1, text="ایجاد حساب", command=self.show_view_person, font=("Arial", 12)).pack(pady=10)
 
         Label(frame2, text="در صورت داشتن حساب از موارد زیر استفاده کنید.", font=("Arial", 12)).pack(pady=10)
         Button(frame2, text="چک", command=self.show_view_check, font=("Arial", 12)).pack(pady=20)
